@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+  /* === Figma Palette - Default Colors === */
+  --color-danger: #BF0606;
+  --color-sky: #00B7FF;
+  --color-success: #02A64D;
+  --color-brand: #3939FF;
+  --color-navy: #0F2940;
+  --color-gray-mid: #999999;
+  --color-gray-light: #EEEEEE;
+  --color-white-pure: #FFFFFF;
+
+  /* Semantic aliases - used throughout project */
+  --color-primary: #3939FF;
+  --color-primary-hover: #2D2DCC;
+  --color-secondary: #0F2940;
+  --color-accent: #00B7FF;
+  --color-success-base: #02A64D;
+  --color-danger-base: #BF0606;
+  --color-muted: #999999;
+  --color-border: #EEEEEE;
+  --color-background: #FFFFFF;
+  --color-foreground: #0F2940;
+
+  /* Fonts */
+  --font-sans: Inter, system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Base defaults using your palette */
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-white-pure);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
