@@ -11,7 +11,7 @@ const App = () => {
         <Route path="/" element={<MainDashboard />} />
       </Route>
       <Route element={<WizardLayout />}>
-        <Route path="/wizard" element={<XRayWizard />} />
+        <Route path="/cyber-xray" element={<XRayWizard />} />
       </Route>
     </Routes>
   )

@@ -1,41 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
-@theme {
-  /* === Figma Palette - Default Colors === */
-  --color-danger: #BF0606;
-  --color-sky: #00B7FF;
-  --color-success: #02A64D;
-  --color-brand: #3939FF;
-  --color-navy: #0F2940;
-  --color-gray-mid: #999999;
-  --color-gray-light: #EEEEEE;
-  --color-white-pure: #FFFFFF;
-
-  /* Semantic aliases - used throughout project */
-  --color-primary: #3939FF;
-  --color-primary-hover: #2D2DCC;
-  --color-secondary: #0F2940;
-  --color-accent: #00B7FF;
-  --color-success-base: #02A64D;
-  --color-danger-base: #BF0606;
-  --color-muted: #999999;
-  --color-border: #EEEEEE;
-  --color-background: #FFFFFF;
-  --color-foreground: #0F2940;
-
-  /* Fonts */
-  --font-sans: Inter, system-ui, 'Segoe UI', Roboto, sans-serif;
+/* Licensed fonts - add files to public/fonts if you have them */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: local('Proxima Nova'), local('ProximaNova-Regular');
+  font-weight: 400;
+  font-display: swap;
 }
-
-/* Base defaults using your palette */
-:root {
-  color-scheme: light;
+@font-face {
+  font-family: 'Proxima Nova';
+  src: local('Proxima Nova Bold'), local('ProximaNova-Bold');
+  font-weight: 700;
+  font-display: swap;
 }
-
-body {
-  background-color: var(--color-white-pure);
-  color: var(--color-navy);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+@font-face {
+  font-family: 'D-DIN';
+  src: local('D-DIN'), local('D-DIN-Regular'), local('DIN Alternate'), local('DIN');
+  font-weight: 400;
+  font-display: swap;
 }

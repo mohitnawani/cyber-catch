@@ -16,15 +16,24 @@ export default {
         'gray-mid': '#999999',
         'gray-light': '#EEEEEE',
         'white-pure': '#FFFFFF',
-        // Semantic aliases (backwards compatible)
+        // Semantic aliases
         background: '#FFFFFF',
         foreground: '#0F2940',
         card: '#FFFFFF',
         border: '#EEEEEE',
         primary: '#3939FF',
+        'primary-hover': '#2D2DCC',
         secondary: '#0F2940',
         muted: '#999999',
         accent: '#00B7FF',
+        'success-base': '#02A64D',
+        'danger-base': '#BF0606',
+      },
+      fontFamily: {
+        sans: ['Montserrat', 'Proxima Nova', 'D-DIN', 'Inter', 'system-ui', 'Segoe UI', 'Roboto', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+        proxima: ['Proxima Nova', 'Montserrat', 'sans-serif'],
+        ddin: ['D-DIN', 'DIN Alternate', 'Montserrat', 'sans-serif'],
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],
@@ -50,4 +59,18 @@ export default {
       },
     },
   },
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        ':root': { colorScheme: 'light' },
+        body: {
+          backgroundColor: theme('colors.white-pure'),
+          color: theme('colors.navy'),
+          fontFamily: theme('fontFamily.sans').join(', '),
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+        },
+      })
+    },
+  ],
 }
