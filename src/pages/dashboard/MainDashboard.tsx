@@ -1,11 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LineChart as ReChart, Line } from 'recharts'
 import CyberCatchScoreChart from '../../components/charts/LineChart'
 
-import cross from '../../assets/cross.png'
-import rectangle from '../../assets/Rectangle.png'
-import tick from '../../assets/Tick.png'
-import phisher from '../../assets/Phisher.png'
-
 const catchScoreData = [
   { name: 'Mon', prev: 44, avg: 36 },
   { name: 'Tue', prev: 52, avg: 40 },
@@ -38,7 +33,7 @@ function SevenPillars() {
   return (
     <div className="relative h-[190px] flex items-center justify-center overflow-hidden">
       <div className="absolute w-[168px] h-[168px] rounded-full border-[3px] border-success/50" />
-      <div className="absolute w-[132px] h-[132px] rounded-full border-[3px] border-success/30" />
+      <div className="absolute w-[132px] h-[168px] rounded-full border-[3px] border-success/30" />
       <div className="absolute w-16 h-16 rounded-full bg-[#0F2940]/80 left-[14%] top-[36%] flex items-center justify-center text-[7px] text-white">People</div>
       <div className="absolute w-14 h-14 rounded-full bg-success/80 left-[36%] top-[14%] flex items-center justify-center text-[6px] text-white text-center leading-none">Networks</div>
       <div className="absolute w-16 h-16 rounded-full bg-sky/70 right-[14%] top-[36%] flex items-center justify-center text-[7px] text-white">Resiliency</div>
@@ -73,18 +68,18 @@ export default function MainDashboard() {
             </ResponsiveContainer>
           </div>
           <div className="grid grid-cols-2 gap-1 text-[10px] text-navy/60">
-            <span className="flex items-center gap-1"><img src={rectangle} alt="p1" className="w-3 h-3 object-contain" /> Product 1</span>
-            <span className="flex items-center gap-1"><img src={rectangle} alt="p2" className="w-3 h-3 object-contain" /> Product 2</span>
-            <span className="flex items-center gap-1"><img src={rectangle} alt="p3" className="w-3 h-3 object-contain" /> Product 3</span>
-            <span className="flex items-center gap-1"><img src={rectangle} alt="p4" className="w-3 h-3 object-contain" /> Product 4</span>
+            <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-brand" /> Product 1</span>
+            <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-sky" /> Product 2</span>
+            <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-violet-400" /> Product 3</span>
+            <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-success" /> Product 4</span>
           </div>
         </Card>
 
         <div className="col-span-12 lg:col-span-7 grid grid-cols-3 gap-2" style={{ paddingLeft: '4px' }}>
           {[
-            { v: '464', label: 'Cyber X-Ray Score', img: tick, color: 'text-brand', bg: 'bg-brand/10' },
-            { v: '126', label: 'CyberCheck24x7 Score', img: cross, color: 'text-brand', bg: 'bg-brand/10' },
-            { v: '356', label: 'CyberPhisher Score', img: phisher, color: 'text-brand', bg: 'bg-brand/10' },
+            { v: '464', label: 'Cyber X-Ray Score', color: 'text-brand', bg: 'bg-brand/10' },
+            { v: '126', label: 'CyberCheck24x7 Score', color: 'text-brand', bg: 'bg-brand/10' },
+            { v: '356', label: 'CyberPhisher Score', color: 'text-brand', bg: 'bg-brand/10' },
           ].map(c => (
             <div key={c.label} className="rounded-2xl border border-gray-light bg-white-pure p-4 flex flex-col justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)]" style={{ width: '161px', height: '123px' }}>
               <div className={`text-5xl font-bold ${c.color}`} style={{ fontFamily: '"D-DIN", "DIN Alternate", "Montserrat", sans-serif', fontWeight: '400', lineHeight: '1', letterSpacing: '0%' }}>{c.v}</div>

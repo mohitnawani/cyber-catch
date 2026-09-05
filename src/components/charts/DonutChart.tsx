@@ -1,17 +1,54 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+} from "recharts";
 
-const data = [{name:'High',value:30},{name:'Medium',value:50},{name:'Low',value:20}]
-const colors = ['#ef4444','#f59e0b','#10b981']
+const data = [
+  {
+    name: "High Severity",
+    value: 46,
+    color: "#3939FF",
+  },
+  {
+    name: "Low Severity",
+    value: 25,
+    color: "#00B7FF",
+  },
+  {
+    name: "Med Severity",
+    value: 25,
+    color: "#02A64D",
+  },
+];
 
-export default function DonutChart() {
+export default function SeverityChart() {
   return (
-    <ResponsiveContainer width="100%" height={200}>
-      <PieChart>
-        <Pie data={data} innerRadius={60} outerRadius={80} dataKey="value">
-          {data.map((_,i)=><Cell key={i} fill={colors[i]}/>)}
-        </Pie>
-        <Tooltip/>
-      </PieChart>
-    </ResponsiveContainer>
-  )
+    <div className="w-[300px] h-[300px]">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={data}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            innerRadius={70}
+            outerRadius={100}
+            paddingAngle={0}
+            startAngle={90}
+            endAngle={-270}
+          >
+            {data.map((item) => (
+              <Cell
+                key={item.name}
+                fill={item.color}
+              />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  );
 }

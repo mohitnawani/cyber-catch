@@ -1,21 +1,10 @@
 import EmptyStateCard from '../../components/ui/EmptyStateCard'
-import Sidebar from '../../components/ui/Sidebar'
 
 export default function Wizard() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="flex h-screen">
-        {/* Column 1: Far-left sidebar */}
-        <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
-          <Sidebar currentPage="cyber-xray" onNavItemClick={() => {}} />
-          <div className="mt-auto">
-            <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-sm font-bold">
-              You
-            </div>
-          </div>
-        </aside>
-
-        {/* Column 2: Wizard step rail */}
+      <div className="flex min-h-[calc(100vh-32px)]">
+        {/* Wizard step rail */}
         <aside className="w-80 bg-white border-l border-gray-200 flex flex-col">
           <div className="p-6 border-b border-gray-200">
             <div className="flex items-center justify-between">

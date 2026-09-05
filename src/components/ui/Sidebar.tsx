@@ -1,55 +1,81 @@
-type SidebarNavItem = {
-  label: string
-  iconSvg: string
-  href?: string
-  active?: boolean
-}
+import { NavLink } from "react-router"
 
-type SidebarProps = {
-  currentPage: 'dashboard' | 'cyber-check' | 'cyber-xray' | 'cyber-phisher' | 'organizations'
-  onNavItemClick?: (page: string) => void
-}
+import cyber_catch from "../../assets/cyber_catch.png"
+import cross from "../../assets/cross.png"
+import tick from "../../assets/Tick.png"
+import Rectangle from "../../assets/Rectangle.png"
+import Phisher from "../../assets/Phisher.png"
+import dp from "../../assets/dp.png"
 
-export default function Sidebar({ currentPage = 'dashboard', onNavItemClick }: SidebarProps) {
-  const navItems: SidebarNavItem[] = [
-    { label: 'Dashboard', iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M3 12l2-5h14l2 5V12L3 12z"/></svg>', href: '/', active: currentPage === 'dashboard' },
-    { label: 'Cyber Check', iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14l2-2l4.5 4.5"/></svg>', href: '/cyber-check', active: currentPage === 'cyber-check' },
-    { label: 'Cyber X-Ray', iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M17 3a1 1 0 0 1 1 1v8a1 1 0 0 1-2 0V4a1 1 0 0 1 1-1zm4 6V7a1 1 0 0 1 2 0v5h2a1 1 0 0 1 1 1v8a1 1 0 0 1-2 0v-5h-2a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1zm-8 0V7a1 1 0 0 1 2 0v6H4a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0z"/></svg>', href: '/cyber-xray', active: currentPage === 'cyber-xray' },
-    { label: 'Cyber Phisher', iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="3" y2="21"/></svg>', href: '/cyber-phisher', active: currentPage === 'cyber-phisher' },
-    { label: 'Organizations', iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="3" y2="21"/></svg>', href: '/organizations', active: currentPage === 'organizations' },
-  ]
 
+const nav = [
+  { label: "Dashboard", icon: Rectangle, to: "/" },
+  { label: "Cyber Check", icon: tick, to: "/cyber-check" },
+  { label: "Cyber X-Ray", icon: cross, to: "/cyber-xray" },
+  { label: "Cyber Phisher", icon: Phisher, to: "/cyber-phisher" },
+]
+
+export default function Sidebar() {
   return (
-    <nav className="w-64 bg-white border-r border-gray-200 flex flex-col">
-      <div className="h-14 flex items-center justify-center px-6 text-xl font-bold text-indigo-600">
-        CyberCatch
+    <nav className="fixed left-0 top-0 h-full w-[68px] lg:w-[200px] bg-white-pure  flex flex-col justify-center z-20">
+
+      {/* Logo */}
+      <div className="h-[56px] flex items-center gap-2 px-3 border-b border-gray-light/80">
+        <div className="w-6 h-6 rounded-full border border-gray-light flex items-center justify-center shrink-0" />
+
+        <img src={cyber_catch} alt="cyber" />
       </div>
-      <div className="flex flex-col items-center gap-2 pt-2 pb-6 text-[11px]">
-        {navItems.map((item) => (
-          <a
+
+      {/* Navigation */}
+      <div className="flex-1 py-6 px-2 space-y-5">
+
+        {nav.map((item) => (
+          <NavLink
             key={item.label}
-            href={item.href || '#'}
-            className={`
-              flex flex-col items-center gap-1.5 text-sm transition
-              ${item.active ? 'text-indigo-700 font-bold' : 'text-navy/60 hover:text-navy'}
-              ${item.active ? 'bg-indigo-50' : 'bg-transparent'}
-            `}
-            onClick={() => {
-              if (onNavItemClick) {
-                onNavItemClick(item.label)
-              }
-            }}
+            to={item.to}
+            className={({ isActive }) =>
+              `flex flex-col items-center gap-1.5 text-[11px] transition ${
+                isActive
+                  ? "text-brand"
+                  : "text-navy/40 hover:text-navy/70"
+              }`
+            }
           >
-            <div dangerouslySetInnerHTML={{ __html: item.iconSvg }} className="w-5 h-5 mb-1" />
-            <span className="text-xs">{item.label}</span>
-          </a>
+            {({ isActive }) => (
+              <>
+                <span
+                  className={`w-10 h-10 rounded-lg flex items-center justify-center border ${
+                    isActive
+                      ? "border-brand/20 bg-brand/5"
+                      : "border-transparent bg-transparent"
+                  }`}
+                >
+                  <img
+                    src={item.icon}
+                    alt={item.label}
+                    className="w-[18px] h-[18px] object-contain"
+                  />
+                </span>
+
+                <span className="hidden lg:block leading-none">
+                  {item.label}
+                </span>
+              </>
+            )}
+          </NavLink>
         ))}
-        <div className="mt-auto">
-          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-sm font-bold">
-            You
-          </div>
-        </div>
+
       </div>
+
+      {/* User */}
+      <div className="p-3 flex justify-center lg:justify-start">
+        <img
+          src={dp}
+          alt="user"
+          className="w-15 h-15 rounded-full border-2 border-white shadow"
+        />
+      </div>
+
     </nav>
   )
 }
