@@ -17,7 +17,7 @@ const nav = [
 
 export default function Sidebar() {
   return (
-    <nav className=" h-full w-auto lg:w-[107px] bg-white-pure  flex flex-col justify-center z-20">
+    <nav className="fixed left-0 top-0 z-20 h-full w-[107px] bg-white-pure flex flex-col">
 
       {/* Logo */}
       <div className="h-[82px] flex items-center justify-center border-b border-gray-light/80 bg-white-pure">
@@ -25,13 +25,13 @@ export default function Sidebar() {
           <img
             src={cyber_catch}
             alt="CyberCatch"
-            className="h- w-[107px] max-w-none -translate-x-[14px] lg:translate-x-0"
+            className="h-auto w-[107px] max-w-none -translate-x-[14px] lg:translate-x-0"
           />
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 py-6 px-2 space-y-5">
+      <div className="flex-1 flex flex-col justify-center px-2 space-y-5">
 
         {nav.map((item) => (
           <NavLink

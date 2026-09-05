@@ -11,7 +11,7 @@ export default function DashboardLayout() {
     <div className="min-h-screen bg-[#F6F7F9] text-navy flex">
       <Sidebar />
 
-      <div className="flex-1 ml-[68px] lg:ml-[200px]">
+      <div className="flex-1 ml-[107px]">
 
 
         <header className="h-12 bg-white-pure border-b border-gray-light flex items-center px-4 justify-between sticky top-0 z-10 lg:hidden">

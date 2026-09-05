@@ -1,5 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LineChart as ReChart, Line } from 'recharts'
 import CyberCatchScoreChart from '../../components/charts/LineChart'
+import SeverityChart from '../../components/charts/DonutChart'
 
 const catchScoreData = [
   { name: 'Mon', prev: 44, avg: 36 },
@@ -32,8 +33,8 @@ function Card({ title, action, children, className = '' }: { title: string; acti
 function SevenPillars() {
   return (
     <div className="relative h-[190px] flex items-center justify-center overflow-hidden">
-      <div className="absolute w-[168px] h-[168px] rounded-full border-[3px] border-success/50" />
-      <div className="absolute w-[132px] h-[168px] rounded-full border-[3px] border-success/30" />
+      <div className="absolute w-[168px] h-[168px] rounded-full border-[5px] border-success/50" />
+      <div className="absolute w-[132px] h-[168px] rounded-full border-[5px] border-success/30" />
       <div className="absolute w-16 h-16 rounded-full bg-[#0F2940]/80 left-[14%] top-[36%] flex items-center justify-center text-[7px] text-white">People</div>
       <div className="absolute w-14 h-14 rounded-full bg-success/80 left-[36%] top-[14%] flex items-center justify-center text-[6px] text-white text-center leading-none">Networks</div>
       <div className="absolute w-16 h-16 rounded-full bg-sky/70 right-[14%] top-[36%] flex items-center justify-center text-[7px] text-white">Resiliency</div>
@@ -50,11 +51,11 @@ export default function MainDashboard() {
     <div className="space-y-4 max-w-[1280px] mx-auto">
       <div className="grid grid-cols-12 gap-4">
 
-        <div className="col-span-12 lg:col-span-7">
+        <div className="col-span-12 lg:col-span-5 order-1">
           <CyberCatchScoreChart />
         </div>
 
-        <Card title="Total Test Conducted by Product" className="col-span-12 lg:col-span-5 xl:col-span-2">
+        <Card title="Total Test Conducted by Product" className="col-span-12 lg:col-span-4 order-3">
           <div className="h-[190px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={productData} barCategoryGap={18}>
@@ -75,24 +76,28 @@ export default function MainDashboard() {
           </div>
         </Card>
 
-        <div className="col-span-12 lg:col-span-7 grid grid-cols-3 gap-2" style={{ paddingLeft: '4px' }}>
+        <div className="col-span-12 lg:col-span-5 order-4 grid grid-cols-3 gap-2" style={{ paddingLeft: '4px' }}>
           {[
             { v: '464', label: 'Cyber X-Ray Score', color: 'text-brand', bg: 'bg-brand/10' },
             { v: '126', label: 'CyberCheck24x7 Score', color: 'text-brand', bg: 'bg-brand/10' },
             { v: '356', label: 'CyberPhisher Score', color: 'text-brand', bg: 'bg-brand/10' },
           ].map(c => (
-            <div key={c.label} className="rounded-2xl border border-gray-light bg-white-pure p-4 flex flex-col justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)]" style={{ width: '161px', height: '123px' }}>
+            <div key={c.label} className="min-w-0 rounded-2xl border border-gray-light bg-white-pure p-4 flex flex-col justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)]" style={{ height: '123px' }}>
               <div className={`text-5xl font-bold ${c.color}`} style={{ fontFamily: '"D-DIN", "DIN Alternate", "Montserrat", sans-serif', fontWeight: '400', lineHeight: '1', letterSpacing: '0%' }}>{c.v}</div>
               <div className="text-[11px] text-navy mt-1 leading-tight flex items-center gap-1">{c.label}</div>
             </div>
           ))}
         </div>
 
-        <Card title="7 Pillars" className="col-span-12 lg:col-span-5 xl:col-span-3 row-span-2">
+        <Card title="CyberPhisher Severity Breakdown" className="col-span-12 lg:col-span-3 order-2">
+          <SeverityChart />
+        </Card>
+
+        <Card title="7 Pillars" className="col-span-12 lg:col-span-5 order-5 row-span-2">
           <SevenPillars />
         </Card>
 
-        <Card title="Cyber Breach Score" className="col-span-12 lg:col-span-5 xl:col-span-2 row-span-2 flex flex-col justify-center gap-8">
+        <Card title="Cyber Breach Score" className="col-span-12 lg:col-span-2 order-6 row-span-2 flex flex-col justify-center gap-8">
           <div className="text-center">
             <div className="text-3xl font-bold text-brand">73</div><div className="text-xs text-gray-mid">Score</div>
           </div>
@@ -101,7 +106,7 @@ export default function MainDashboard() {
           </div>
         </Card>
 
-        <Card title="CyberBenchmark" className="col-span-12 lg:col-span-7" action={<div className="flex gap-2 text-[11px]"><span className="text-gray-mid">All</span><span className="px-2 py-0.5 rounded-full bg-brand text-white">D</span><span className="text-gray-mid">W</span><span className="text-gray-mid">M</span><span className="text-gray-mid">Custom</span></div>}>
+        <Card title="CyberBenchmark" className="col-span-12 lg:col-span-5 order-7" action={<div className="flex gap-2 text-[11px]"><span className="text-gray-mid">All</span><span className="px-2 py-0.5 rounded-full bg-brand text-white">D</span><span className="text-gray-mid">W</span><span className="text-gray-mid">M</span><span className="text-gray-mid">Custom</span></div>}>
           <div className="h-[140px]">
             <ResponsiveContainer width="100%" height="100%">
               <ReChart data={catchScoreData}>
