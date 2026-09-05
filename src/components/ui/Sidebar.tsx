@@ -17,13 +17,17 @@ const nav = [
 
 export default function Sidebar() {
   return (
-    <nav className="fixed left-0 top-0 h-full w-[68px] lg:w-[200px] bg-white-pure  flex flex-col justify-center z-20">
+    <nav className=" h-full w-auto lg:w-[107px] bg-white-pure  flex flex-col justify-center z-20">
 
       {/* Logo */}
-      <div className="h-[56px] flex items-center gap-2 px-3 border-b border-gray-light/80">
-        <div className="w-6 h-6 rounded-full border border-gray-light flex items-center justify-center shrink-0" />
-
-        <img src={cyber_catch} alt="cyber" />
+      <div className="h-[82px] flex items-center justify-center border-b border-gray-light/80 bg-white-pure">
+        <div className="h-[58px] w-[52px] overflow-hidden lg:w-[184px]" aria-label="CyberCatch">
+          <img
+            src={cyber_catch}
+            alt="CyberCatch"
+            className="h- w-[107px] max-w-none -translate-x-[14px] lg:translate-x-0"
+          />
+        </div>
       </div>
 
       {/* Navigation */}
@@ -44,16 +48,14 @@ export default function Sidebar() {
             {({ isActive }) => (
               <>
                 <span
-                  className={`w-10 h-10 rounded-lg flex items-center justify-center border ${
-                    isActive
-                      ? "border-brand/20 bg-brand/5"
-                      : "border-transparent bg-transparent"
+                  className={`h-[90px] w-[90px] rounded-[15px] flex items-center justify-center ${
+                    isActive ? "bg-[#5E81F41A]" : "bg-transparent"
                   }`}
                 >
                   <img
                     src={item.icon}
                     alt={item.label}
-                    className="w-[18px] h-[18px] object-contain"
+                    className={`h-[33.6px] w-[33.6px] rounded-[3px] border-2 object-contain `}
                   />
                 </span>
 
@@ -68,12 +70,18 @@ export default function Sidebar() {
       </div>
 
       {/* User */}
-      <div className="p-3 flex justify-center lg:justify-start">
-        <img
-          src={dp}
-          alt="user"
-          className="w-15 h-15 rounded-full border-2 border-white shadow"
-        />
+      <div className="p-3 flex justify-center">
+        <div className="relative">
+          <img
+            src={dp}
+            alt="user"
+            className="w-15 h-15 rounded-full border-2 border-white shadow"
+          />
+          <span
+            className="absolute bottom-1 right-1 h-3 w-3 rounded-full border-2 border-white bg-emerald-500"
+            aria-label="Online"
+          />
+        </div>
       </div>
 
     </nav>
