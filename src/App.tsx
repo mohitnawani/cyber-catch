@@ -5,6 +5,11 @@ import MainDashboard from './pages/dashboard/MainDashboard'
 import SchedulePage from './pages/cyberxray/SchedulePage'
 import ScanUrlsPage from './pages/cyberxray/ScanUrlsPage'
 import ReviewPage from './pages/cyberxray/ReviewPage'
+import Campaigns from './pages/cyberphisher/Campaigns'
+import Templates from './pages/cyberphisher/Templates'
+import Users from './pages/cyberphisher/Users'
+import Reports from './pages/cyberphisher/Reports'
+import CyberPhisherLayout from './layouts/CyberPhisherLayout'
 
 function ProductPage({ title }: { title: string }) {
   return (
@@ -27,7 +32,13 @@ const App = () => {
           <Route path="/cyber-xray/review" element={<ReviewPage />} />
         </Route>
         <Route path="/cyber-check" element={<ProductPage title="Cyber Check" />} />
-        <Route path="/cyber-phisher" element={<ProductPage title="Cyber Phisher" />} />
+        <Route path="/cyber-phisher" element={<Navigate to="/cyber-phisher/campaigns" replace />} />
+        <Route element={<CyberPhisherLayout />}>
+          <Route path="/cyber-phisher/campaigns" element={<Campaigns />} />
+          <Route path="/cyber-phisher/users" element={<Users />} />
+          <Route path="/cyber-phisher/templates" element={<Templates />} />
+          <Route path="/cyber-phisher/reports" element={<Reports />} />
+        </Route>
       </Route>
     </Routes>
   )

@@ -1,13 +1,42 @@
-import { ClipboardCheck } from 'lucide-react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import Button from '../../components/ui/Button'
+
+const acknowledgements = [
+  'I acknowledge that I own the URLs that Cyber X-Ray will scan',
+  'I acknowledge that Cyber X-Ray will run scans at the schedule I have identified',
+  'I authorize Cyber X-Ray to run scans at the intervals I have specified',
+  'I understand that a scan may impact the performance of the system where the URLs are hosted',
+]
 
 export default function ReviewPage() {
+  const [confirmed, setConfirmed] = useState<boolean[]>(Array(acknowledgements.length).fill(false))
+  const navigate = useNavigate()
+  const ready = confirmed.every(Boolean)
+
+  const toggleAcknowledgement = (index: number) => {
+    setConfirmed((current) => current.map((value, itemIndex) => itemIndex === index ? !value : value))
+  }
+
   return (
-    <section className="rounded-2xl border border-gray-light bg-white-pure p-6 shadow-[0_2px_12px_rgba(15,41,64,0.06)] sm:p-8">
-      <ClipboardCheck className="text-brand" size={26} />
-      <h1 className="mt-4 text-2xl font-bold text-navy">Review your Cyber X-Ray</h1>
-      <p className="mt-2 text-sm text-navy/60">Confirm your scan schedule and selected URLs before starting the first scan.</p>
-      <div className="mt-7 space-y-3 rounded-xl bg-[#F6F7F9] p-5 text-sm text-navy/70"><p><strong className="text-navy">Schedule:</strong> Weekly at 09:00</p><p><strong className="text-navy">URLs:</strong> No URLs added yet</p></div>
-      <button className="mt-5 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white">Start scan</button>
+    <section className="max-w-[915px] py-8">
+      <h1 className="font-montserrat text-[34px] font-bold leading-[34px] tracking-normal text-black">Review</h1>
+      <div className="mt-5 rounded-2xl bg-white p-3 shadow-[0_4px_18px_rgba(15,41,64,0.06)]">
+        <div className="space-y-4 p-[50px]">
+          {acknowledgements.map((acknowledgement, index) => (
+            <label key={acknowledgement} className="flex cursor-pointer items-start gap-8">
+              <input
+                type="checkbox"
+                checked={confirmed[index]}
+                onChange={() => toggleAcknowledgement(index)}
+                className="mt-[7px] h-4 w-4 accent-brand"
+              />
+              <span className="font-ddin  font-bold tracking-normal text-black">{acknowledgement}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+      <Button disabled={!ready} onClick={() => navigate('/')} className="mt-7 px-5 py-3 text-lg">All Good, Go to Dashboard</Button>
     </section>
   )
 }

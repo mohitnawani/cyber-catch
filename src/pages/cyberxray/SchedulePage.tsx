@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CalendarDays } from 'lucide-react'
 import { useNavigate } from 'react-router'
+import Button from '../../components/ui/Button'
 
 type Interval = 'daily' | 'weekly' | 'bi-weekly' | 'monthly'
 
@@ -14,7 +15,6 @@ const intervalCopy: Record<Interval, string> = {
 const fieldLabelClass = 'block text-xs font-bold text-navy'
 const inputClass = 'mt-3 rounded-md border border-gray-light bg-white px-3 py-2.5 text-sm font-normal text-navy/65 outline-none focus:border-brand'
 const helperTextClass = 'text-xs leading-5 text-black'
-const primaryButtonClass = 'w-[143px] rounded-md bg-brand py-2.5 text-xs font-bold text-white transition hover:bg-brand/90'
 
 export default function SchedulePage() {
   const [interval, setInterval] = useState<Interval>('bi-weekly')
@@ -73,7 +73,7 @@ export default function SchedulePage() {
         </label>
         <p className={`-mt-2 ${helperTextClass}`}>Best to run tests when the impact to your sites is minimal.</p>
 
-        <button type="button" onClick={() => navigate('/cyber-xray/scan-urls')} className={primaryButtonClass}>Continue</button>
+        <Button type="button" onClick={() => navigate('/cyber-xray/scan-urls')} className="w-[143px] text-xs">Continue</Button>
       </div>
     </section>
   )
