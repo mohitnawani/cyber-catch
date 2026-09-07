@@ -1,4 +1,4 @@
-import { Bot, UserRound,  LayoutDashboard, FileText } from 'lucide-react'
+import { Bot, UserRound, LayoutDashboard, FileText } from 'lucide-react'
 import { NavLink } from 'react-router'
 import cross from '../../assets/cross.png'
 
@@ -6,7 +6,7 @@ const steps = [
   { label: 'Campaigns', to: '/cyber-phisher/campaigns', icon: Bot },
   { label: 'Users', to: '/cyber-phisher/users', icon: UserRound },
   { label: 'Templates', to: '/cyber-phisher/templates', icon: LayoutDashboard },
-  { label: 'Reports', to: '/cyber-phisher/reports', icon: FileText },
+  { label: 'Landing Pages', to: '/cyber-phisher/landing-pages', icon: FileText },
 ]
 
 export default function CyberFisherbar() {

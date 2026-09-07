@@ -7,9 +7,11 @@ import ScanUrlsPage from './pages/cyberxray/ScanUrlsPage'
 import ReviewPage from './pages/cyberxray/ReviewPage'
 import Campaigns from './pages/cyberphisher/Campaigns'
 import Templates from './pages/cyberphisher/Templates'
-import Users from './pages/cyberphisher/Users'
+import Users from './pages/cyberphisher/users'
 import Reports from './pages/cyberphisher/Reports'
+import LandingPage from './pages/cyberphisher/Landing_page'
 import CyberPhisherLayout from './layouts/CyberPhisherLayout'
+import OrganizationPage from './pages/organizations/OrganizationPage'
 
 function ProductPage({ title }: { title: string }) {
   return (
@@ -32,12 +34,14 @@ const App = () => {
           <Route path="/cyber-xray/review" element={<ReviewPage />} />
         </Route>
         <Route path="/cyber-check" element={<ProductPage title="Cyber Check" />} />
+        <Route path="/organization" element={<OrganizationPage />} />
         <Route path="/cyber-phisher" element={<Navigate to="/cyber-phisher/campaigns" replace />} />
         <Route element={<CyberPhisherLayout />}>
           <Route path="/cyber-phisher/campaigns" element={<Campaigns />} />
           <Route path="/cyber-phisher/users" element={<Users />} />
           <Route path="/cyber-phisher/templates" element={<Templates />} />
           <Route path="/cyber-phisher/reports" element={<Reports />} />
+          <Route path="/cyber-phisher/landing-pages" element={<LandingPage />} />
         </Route>
       </Route>
     </Routes>

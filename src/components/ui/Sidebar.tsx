@@ -6,13 +6,19 @@ import tick from "../../assets/Tick.png"
 import Rectangle from "../../assets/Rectangle.png"
 import Phisher from "../../assets/Phisher.png"
 import dp from "../../assets/dp.png"
+import { Building2 } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 
+type NavItem =
+  | { label: string; icon: string; to: string; isLucideIcon?: false }
+  | { label: string; icon: LucideIcon; to: string; isLucideIcon: true }
 
-const nav = [
+const nav: NavItem[] = [
   { label: "Dashboard", icon: Rectangle, to: "/" },
   { label: "Cyber Check", icon: tick, to: "/cyber-check" },
   { label: "Cyber X-Ray", icon: cross, to: "/cyber-xray" },
   { label: "Cyber Phisher", icon: Phisher, to: "/cyber-phisher" },
+  { label: "Organization", icon: Building2, to: "/organization", isLucideIcon: true },
 ]
 
 export default function Sidebar() {
@@ -52,11 +58,15 @@ export default function Sidebar() {
                     isActive ? "bg-[#5E81F41A]" : "bg-transparent"
                   }`}
                 >
-                  <img
-                    src={item.icon}
-                    alt={item.label}
-                    className={`h-[33.6px] w-[33.6px] rounded-[3px] border-2 object-contain `}
-                  />
+                  {item.isLucideIcon ? (
+                    <item.icon size={34} strokeWidth={1.8} aria-label={item.label} />
+                  ) : (
+                    <img
+                      src={item.icon}
+                      alt={item.label}
+                      className="h-[33.6px] w-[33.6px] rounded-[3px] border-2 object-contain"
+                    />
+                  )}
                 </span>
 
                 <span className="hidden lg:block leading-none">
