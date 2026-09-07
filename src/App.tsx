@@ -43,6 +43,7 @@ const App = () => {
           <Route path="/cyber-phisher/reports" element={<Reports />} />
           <Route path="/cyber-phisher/landing-pages" element={<LandingPage />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   )
