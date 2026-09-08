@@ -12,19 +12,19 @@ const severityData: SeverityItem[] = [
     name: "Low Severity",
     value: 25,
     color: "#00B7FF",
-    calloutClassName: "right-0 top-3 bg-sky/10 text-sky",
+    calloutClassName: "right-8 top-8 bg-[#D9F4FF] text-sky absolute rounded-full text-[10px] p-5",
   },
   {
     name: "High Severity",
     value: 46,
     color: "#3939FF",
-    calloutClassName: "left-0 top-[95px] bg-brand/10 text-brand",
+    calloutClassName: "left-25 bottom-18 bg-[#D9F4FF] text-brand absolute p-5 text-[10px] ",
   },
   {
     name: "Med Severity",
     value: 25,
     color: "#00C98D",
-    calloutClassName: "right-0 top-[128px] bg-success/10 text-success",
+    calloutClassName: "left-8 top-8 bg-[#D9F4FF] text-success absolute p-5 text-[10px] ",
   },
 ];
 
@@ -39,7 +39,7 @@ function Callout({
 }) {
   return (
     <div
-      className={`absolute rounded-md px-2 py-1 text-center text-[8px] leading-tight shadow-sm ${className}`}
+      className={`absolute rounded-md px-2 py-1 text-center text-[12px] leading-tight shadow-sm ${className}`}
     >
       <div className="font-bold">{value}</div>
       <div>{label}</div>
@@ -82,7 +82,7 @@ export default function SeverityChart() {
         />
       ))}
 
-      <div className="absolute inset-x-0 bottom-0 flex flex-wrap justify-center gap-x-3 gap-y-1 text-[8px] text-navy/55">
+      <div className="absolute inset-x-0 bottom-0 flex flex-wrap justify-center gap-x-3 gap-y-1 text-[12px] text-navy/55">
         {severityData.map((item) => (
           <span key={item.name} className="flex items-center gap-1">
             <span

@@ -1,6 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LineChart as ReChart, Line } from 'recharts'
 import CyberCatchScoreChart from '../../components/charts/LineChart'
 import SeverityChart from '../../components/charts/DonutChart'
+import SevenPillars from '../../components/charts/SevenPillars'
 
 const catchScoreData = [
   { name: 'Mon', prev: 44, avg: 36 },
@@ -30,21 +31,6 @@ function Card({ title, action, children, className = '' }: { title: string; acti
   )
 }
 
-function SevenPillars() {
-  return (
-    <div className="relative h-[190px] flex items-center justify-center overflow-hidden">
-      <div className="absolute w-[168px] h-[168px] rounded-full border-[5px] border-success/50" />
-      <div className="absolute w-[132px] h-[168px] rounded-full border-[5px] border-success/30" />
-      <div className="absolute w-16 h-16 rounded-full bg-[#0F2940]/80 left-[14%] top-[36%] flex items-center justify-center text-[7px] text-white">People</div>
-      <div className="absolute w-14 h-14 rounded-full bg-success/80 left-[36%] top-[14%] flex items-center justify-center text-[6px] text-white text-center leading-none">Networks</div>
-      <div className="absolute w-16 h-16 rounded-full bg-sky/70 right-[14%] top-[36%] flex items-center justify-center text-[7px] text-white">Resiliency</div>
-      <div className="absolute w-14 h-14 rounded-full bg-danger left-[34%] bottom-[28%] flex items-center justify-center text-[6px] text-white">Gaps</div>
-      <div className="absolute w-9 h-9 rounded-full bg-[#0F2940] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-[6px] text-white">Data</div>
-      <div className="absolute px-1.5 py-0.5 rounded-full bg-success text-white text-[7px] top-[22%] left-1/2 -translate-x-1/2">Wealth & Analytics</div>
-      <div className="absolute px-1.5 py-0.5 rounded-full bg-success text-white text-[7px] bottom-[22%] left-1/2 -translate-x-1/2">Automatic & Orchestration</div>
-    </div>
-  )
-}
 
 export default function MainDashboard() {
   return (
