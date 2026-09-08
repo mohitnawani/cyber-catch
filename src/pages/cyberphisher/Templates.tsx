@@ -107,11 +107,17 @@ const buttonClass =
   "inline-flex h-9 items-center justify-center rounded-md px-4 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
 
 export default function Templates() {
+  // Stores the current template rows shown in the list.
   const [templates, setTemplates] = useState(initialTemplates);
+  // Stores the text used to filter templates by name.
   const [query, setQuery] = useState("");
+  // Tracks which template's three-dot actions menu is open.
   const [openMenu, setOpenMenu] = useState<number | null>(null);
+  // Stores the controlled values for the create or edit form.
   const [form, setForm] = useState<TemplateForm>(emptyForm);
+  // Identifies the template being edited; null means create mode.
   const [editingId, setEditingId] = useState<number | null>(null);
+  // Controls whether the create or edit modal is visible.
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const shownTemplates = templates.filter((template) =>

@@ -44,16 +44,6 @@ export default function CyberCatchScoreChart() {
           </ReChart>
         </ResponsiveContainer>
 
-        {/* floating value cards mimicking the design */}
-        <div className="absolute left-[32%] top-[52%] -translate-x-1/2 bg-white border border-gray-light rounded-lg px-2 py-1 shadow text-[10px] leading-none text-center">
-          <div className="font-bold text-navy">345</div>
-          <div className="text-gray-mid">05.08.2021 12:00</div>
-          <div className="absolute w-2 h-2 bg-white border-r border-b border-gray-light rotate-45 -bottom-1 left-1/2 -translate-x-1/2" />
-        </div>
-        <div className="absolute left-[68%] top-[28%] -translate-x-1/2 bg-sky/10 border border-sky/20 rounded-lg px-2 py-1 text-[10px] leading-none text-center">
-          <div className="font-bold text-navy">281</div>
-          <div className="text-gray-mid">05.08.2021 12:00</div>
-        </div>
       </div>
 
       {/* Legend */}

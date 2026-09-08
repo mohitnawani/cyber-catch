@@ -6,12 +6,14 @@ import SchedulePage from './pages/cyberxray/SchedulePage'
 import ScanUrlsPage from './pages/cyberxray/ScanUrlsPage'
 import ReviewPage from './pages/cyberxray/ReviewPage'
 import Campaigns from './pages/cyberphisher/Campaigns'
+import CreateCampaignPage from './pages/cyberphisher/CreateCampaignPage'
 import Templates from './pages/cyberphisher/Templates'
 import Users from './pages/cyberphisher/users'
 import Reports from './pages/cyberphisher/Reports'
 import LandingPage from './pages/cyberphisher/Landing_page'
 import CyberPhisherLayout from './layouts/CyberPhisherLayout'
 import OrganizationPage from './pages/organizations/OrganizationPage'
+import OrganizationProductsPage from './pages/organizations/OrganizationProductsPage'
 
 function ProductPage({ title }: { title: string }) {
   return (
@@ -35,9 +37,11 @@ const App = () => {
         </Route>
         <Route path="/cyber-check" element={<ProductPage title="Cyber Check" />} />
         <Route path="/organization" element={<OrganizationPage />} />
+        <Route path="/organization/:organizationId" element={<OrganizationProductsPage />} />
         <Route path="/cyber-phisher" element={<Navigate to="/cyber-phisher/campaigns" replace />} />
         <Route element={<CyberPhisherLayout />}>
           <Route path="/cyber-phisher/campaigns" element={<Campaigns />} />
+          <Route path="/cyber-phisher/campaigns/create" element={<CreateCampaignPage />} />
           <Route path="/cyber-phisher/users" element={<Users />} />
           <Route path="/cyber-phisher/templates" element={<Templates />} />
           <Route path="/cyber-phisher/reports" element={<Reports />} />
