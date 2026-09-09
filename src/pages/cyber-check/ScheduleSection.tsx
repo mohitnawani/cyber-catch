@@ -26,18 +26,20 @@ export default function ScheduleSection() {
   const needsWeekday = interval === 'weekly' || interval === 'bi-weekly'
 
   return (
-    <section className="max-w-[620px] py-8">
-      <div className="flex h-11 w-11 items-center justify-center rounded-full text-[#604BFF]">
-        <CalendarDays size={29} strokeWidth={2} />
+    <section className="max-w-[680px] py-4 md:py-8">
+      <div className="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full text-[#604BFF]">
+        <CalendarDays size={26} strokeWidth={2} className="md:w-7 md:h-7" />
       </div>
-      <h1 className="mt-5 text-lg font-bold tracking-tight text-navy">Select Your Test Schedule</h1>
-      <p className="mt-3 text-xs leading-6 text-black font-ddin">
+      <h1 className="mt-4 md:mt-5 text-base md:text-lg font-bold tracking-tight text-navy">
+        Select Your Test Schedule
+      </h1>
+      <p className="mt-2 md:mt-3 text-xs leading-6 text-black font-ddin">
         Test will run on the interval and date/time you select.
         <br />
         Don't worry you can always change this later.
       </p>
 
-      <div className="mt-7 max-w-[380px] space-y-6">
+      <div className="mt-6 md:mt-7 max-w-[420px] space-y-5 md:space-y-6">
         <label className={fieldLabelClass}>
           Select an Interval
           <select
@@ -57,13 +59,13 @@ export default function ScheduleSection() {
         {needsWeekday && (
           <div>
             <p className={fieldLabelClass}>Select day of the week</p>
-            <div className="mt-3 flex justify-between gap-1">
+            <div className="mt-3 flex flex-wrap sm:flex-nowrap gap-1.5 sm:justify-between">
               {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((weekDay) => (
                 <button
                   key={weekDay}
                   type="button"
                   onClick={() => setDay(weekDay)}
-                  className={`h-8 min-w-8 rounded-md px-2 text-xs font-medium transition ${
+                  className={`h-8 flex-1 sm:flex-none sm:min-w-8 rounded-md px-2 text-xs font-medium transition ${
                     day === weekDay ? 'bg-brand text-white' : 'text-navy/45 hover:bg-brand/5'
                   }`}
                 >

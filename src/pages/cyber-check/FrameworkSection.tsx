@@ -114,17 +114,17 @@ export default function FrameworkSection() {
       </div>
 
       {/* Domains List */}
-      <div className="mt-6 max-w-[620px] space-y-3">
+      <div className="mt-6 max-w-[680px] space-y-3">
         {displayedDomains.map((item) => (
           <div
             key={item.id}
-            className="group flex items-center justify-between rounded-2xl border border-gray-light/80 bg-white px-5 py-3.5 shadow-[0_2px_8px_rgba(15,41,64,0.03)] transition hover:border-brand/40 hover:shadow-sm"
+            className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 rounded-2xl border border-gray-light/80 bg-white px-4 py-3 sm:px-5 sm:py-3.5 shadow-[0_2px_8px_rgba(15,41,64,0.03)] transition hover:border-brand/40 hover:shadow-sm"
           >
-            <div className="flex items-center gap-3">
-              <Globe size={16} className="text-brand/60" />
-              <span className="text-xs font-medium text-brand">{item.domain}</span>
+            <div className="flex items-center gap-3 min-w-0">
+              <Globe size={16} className="text-brand/60 shrink-0" />
+              <span className="text-xs font-medium text-brand truncate">{item.domain}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
               <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-brand">
                 <ShieldCheck size={12} />
                 {item.testsCount} tests
@@ -139,7 +139,7 @@ export default function FrameworkSection() {
       </div>
 
       {/* Pagination & Add Domain */}
-      <div className="mt-4 flex max-w-[620px] items-center justify-between">
+      <div className="mt-4 flex flex-wrap max-w-[680px] items-center justify-between gap-3">
         <button
           type="button"
           onClick={() => setShowAddModal(true)}
@@ -238,4 +238,3 @@ export default function FrameworkSection() {
     </section>
   )
 }
-

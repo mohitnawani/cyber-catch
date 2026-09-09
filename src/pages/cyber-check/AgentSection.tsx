@@ -62,12 +62,12 @@ export default function AgentSection() {
         {/* Client ID */}
         <div className="mt-6">
           <label className="block text-xs font-bold text-navy">Client ID</label>
-          <div className="mt-2 flex max-w-[460px] items-center justify-between gap-4">
-            <span className="font-mono text-xs text-navy/80 select-all">{clientId}</span>
+          <div className="mt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 max-w-[480px]">
+            <span className="font-mono text-xs text-navy/80 select-all break-all">{clientId}</span>
             <button
               type="button"
               onClick={() => copyToClipboard(clientId, 'id')}
-              className="inline-flex items-center gap-1.5 rounded-md border border-brand px-4 py-1.5 text-xs font-semibold text-brand transition hover:bg-brand/5"
+              className="inline-flex items-center justify-center gap-1.5 rounded-md border border-brand px-4 py-1.5 text-xs font-semibold text-brand transition hover:bg-brand/5 self-start sm:self-auto shrink-0"
             >
               {copiedId ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
               {copiedId ? 'Copied' : 'Copy'}
@@ -78,12 +78,12 @@ export default function AgentSection() {
         {/* Client Secret */}
         <div className="mt-6">
           <label className="block text-xs font-bold text-navy">Client Secret</label>
-          <div className="mt-2 flex max-w-[460px] items-center justify-between gap-4">
-            <span className="font-mono text-xs text-navy/80 select-all">{clientSecret}</span>
+          <div className="mt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 max-w-[480px]">
+            <span className="font-mono text-xs text-navy/80 select-all break-all">{clientSecret}</span>
             <button
               type="button"
               onClick={() => copyToClipboard(clientSecret, 'secret')}
-              className="inline-flex items-center gap-1.5 rounded-md border border-brand px-4 py-1.5 text-xs font-semibold text-brand transition hover:bg-brand/5"
+              className="inline-flex items-center justify-center gap-1.5 rounded-md border border-brand px-4 py-1.5 text-xs font-semibold text-brand transition hover:bg-brand/5 self-start sm:self-auto shrink-0"
             >
               {copiedSecret ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
               {copiedSecret ? 'Copied' : 'Copy'}
@@ -95,7 +95,7 @@ export default function AgentSection() {
       {/* Download Action Cards */}
       <div className="mt-8 space-y-4 max-w-[680px]">
         {/* Card 1 */}
-        <div className="flex items-center justify-between rounded-xl border border-gray-light bg-white p-5 shadow-[0_2px_8px_rgba(15,41,64,0.03)]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 rounded-xl border border-gray-light bg-white p-4 sm:p-5 shadow-[0_2px_8px_rgba(15,41,64,0.03)]">
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
               DOWNLOAD CREDENTIALS
@@ -116,7 +116,7 @@ export default function AgentSection() {
               document.body.appendChild(element)
               element.click()
             }}
-            className="ml-4 shrink-0 rounded-md border border-brand px-6 py-2 text-xs font-semibold text-brand transition hover:bg-brand/5 inline-flex items-center gap-1.5"
+            className="w-full sm:w-auto shrink-0 rounded-md border border-brand px-6 py-2 text-xs font-semibold text-brand transition hover:bg-brand/5 inline-flex items-center justify-center gap-1.5"
           >
             <Download size={14} />
             Download
@@ -124,8 +124,8 @@ export default function AgentSection() {
         </div>
 
         {/* Card 2 */}
-        <div className="flex items-center justify-between rounded-xl border border-gray-light bg-white p-5 shadow-[0_2px_8px_rgba(15,41,64,0.03)]">
-          <div className="pr-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 rounded-xl border border-gray-light bg-white p-4 sm:p-5 shadow-[0_2px_8px_rgba(15,41,64,0.03)]">
+          <div className="sm:pr-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
               DOWNLOAD YOUR AGENT
             </h3>
@@ -136,7 +136,7 @@ export default function AgentSection() {
           <button
             type="button"
             onClick={() => alert('Downloading CyberCheckAgent.zip...')}
-            className="ml-4 shrink-0 rounded-md border border-brand px-6 py-2 text-xs font-semibold text-brand transition hover:bg-brand/5 inline-flex items-center gap-1.5"
+            className="w-full sm:w-auto shrink-0 rounded-md border border-brand px-6 py-2 text-xs font-semibold text-brand transition hover:bg-brand/5 inline-flex items-center justify-center gap-1.5"
           >
             <Download size={14} />
             Download
@@ -144,8 +144,8 @@ export default function AgentSection() {
         </div>
 
         {/* Card 3 */}
-        <div className="flex items-center justify-between rounded-xl border border-gray-light bg-white p-5 shadow-[0_2px_8px_rgba(15,41,64,0.03)]">
-          <div className="pr-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 rounded-xl border border-gray-light bg-white p-4 sm:p-5 shadow-[0_2px_8px_rgba(15,41,64,0.03)]">
+          <div className="sm:pr-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
               DOWNLOAD LATER
             </h3>
@@ -156,7 +156,7 @@ export default function AgentSection() {
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="ml-4 shrink-0 rounded-md border border-brand px-6 py-2 text-xs font-semibold text-brand transition hover:bg-brand/5"
+            className="w-full sm:w-auto shrink-0 rounded-md border border-brand px-6 py-2 text-xs font-semibold text-brand transition hover:bg-brand/5 inline-flex items-center justify-center"
           >
             Download
           </button>
