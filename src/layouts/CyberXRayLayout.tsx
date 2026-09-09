@@ -15,7 +15,7 @@ export default function CyberXRayLayout() {
     : 'Schedule'
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-32px)] gap-4 lg:gap-8 max-w-[1440px] mx-auto">
+    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-32px)] gap-4 lg:gap-8 max-w-[1440px] mx-auto overflow-hidden">
       {/* Mobile/Tablet Steps Toggle Header */}
       <div className="flex lg:hidden items-center justify-between rounded-xl border border-gray-light bg-white px-4 py-2.5 shadow-xs">
         <div className="flex items-center gap-2.5">
@@ -59,7 +59,7 @@ export default function CyberXRayLayout() {
       </div>
 
       {/* Main Content */}
-      <main className="min-w-0 flex-1 py-1 lg:py-5 overflow-x-hidden">
+      <main className="min-w-0 flex-1 py-1 lg:py-5 overflow-x-hidden overflow-y-auto">
         <Outlet />
       </main>
     </div>

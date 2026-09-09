@@ -53,7 +53,7 @@ export default function FrameworkSection() {
   }
 
   return (
-    <section className="max-w-[760px] py-8 mx-auto">
+    <section className="max-w-[760px] py-8">
       {/* Title */}
       <h1 className="text-2xl font-bold tracking-tight text-navy">
         Select a Security Framework

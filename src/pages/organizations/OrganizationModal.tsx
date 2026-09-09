@@ -47,7 +47,7 @@ export default function OrganizationModal({
   onSave,
 }: Props) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4 mx-auto">
       <div className="relative max-h-[90vh] w-full max-w-90 overflow-y-auto rounded-sm bg-white p-7 shadow-[0_18px_45px_rgba(15,41,64,0.2)]">
         <button
           onClick={onClose}

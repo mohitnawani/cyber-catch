@@ -14,7 +14,7 @@ type CyberCheckbarProps = {
 
 export default function CyberCheckbar({ onClose }: CyberCheckbarProps) {
   return (
-    <aside className="w-full h-full lg:w-[190px] shrink-0 bg-white-pure p-5 lg:px-4 lg:py-12 rounded-2xl lg:rounded-none shadow-[0_2px_12px_rgba(15,41,64,0.04)] lg:shadow-[2px_0_12px_rgba(15,41,64,0.04)] flex flex-col justify-start">
+    <aside className="w-full h-full lg:w-[190px] shrink-0 bg-white-pure p-5 lg:px-4 lg:py-12 rounded-2xl lg:rounded-none shadow-[0_2px_12px_rgba(15,41,64,0.04)] lg:shadow-[2px_0_12px_rgba(15,41,64,0.04)] flex flex-col justify-start sticky ">
       <div className="flex items-center justify-between lg:block">
         <div className="flex items-center gap-3 lg:block">
           <div className="flex h-9 w-9 lg:h-10 lg:w-10 items-center justify-center rounded-full text-[#604BFF]">

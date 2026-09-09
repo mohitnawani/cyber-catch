@@ -7,7 +7,7 @@ export default function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-[#F6F7F9] text-navy flex flex-col lg:flex-row mx-auto">
+    <div className="min-h-screen bg-[#F6F7F9] text-navy flex flex-col lg:flex-row overflow-hidden">
       {/* Mobile/Tablet Backdrop */}
       {isSidebarOpen && (
         <div
@@ -16,9 +16,9 @@ export default function DashboardLayout() {
         />
       )}
 
-      {/* Main Sidebar (Drawer on mobile/tablet, fixed column on desktop) */}
+      {/* Main Sidebar - fixed on left, takes its natural width */}
       <div
-        className={`fixed left-0 top-0 z-40 h-full transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed left-0 top-0 bottom-0 z-40 w-[107px] transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
@@ -26,7 +26,7 @@ export default function DashboardLayout() {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 lg:ml-[107px] min-w-0 transition-all">
+      <div className="flex-1 lg:ml-[107px] min-w-0 transition-all overflow-y-auto">
         {/* Mobile / Tablet Header with Menu Toggle */}
         <header className="h-14 bg-white-pure border-b border-gray-light flex items-center px-4 justify-between sticky top-0 z-20 lg:hidden shadow-xs">
           <div className="flex items-center gap-3">
@@ -43,7 +43,7 @@ export default function DashboardLayout() {
           <User size={18} className="text-navy/70" />
         </header>
 
-        <main className="p-3 sm:p-5 lg:p-6 bg-[#F6F7F9] min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-32px)]">
+        <main className="p-3 sm:p-5 lg:p-6 bg-[#F6F7F9] min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-32px)] overflow-auto">
           <Outlet />
         </main>
       </div>

@@ -46,21 +46,21 @@ export default {
         "4xl": ["38px", { lineHeight: "44px" }],
       },
       spacing: {
-        1: '0.25rem',
-        2: '0.5rem',
-        3: '0.75rem',
-        4: '1rem',
-        5: '1.25rem',
-        6: '1.5rem',
-        7: '1.75rem',
-        8: '2rem',
-        9: '2.25rem',
-        10: '2.5rem',
-        11: '2.75rem',
-        12: '3rem',
-        14: '3.5rem',
-        16: '4rem',
-    },
+        1: '0.5rem',    // 8px
+        2: '1rem',      // 16px
+        3: '1.5rem',    // 24px
+        4: '2rem',      // 32px
+        5: '2.5rem',    // 40px
+        6: '3rem',      // 48px
+        7: '3.5rem',    // 56px
+        8: '4rem',      // 64px
+        9: '4.5rem',    // 72px
+        10: '5rem',     // 80px
+        11: '5.5rem',   // 88px
+        12: '6rem',     // 96px
+        14: '7rem',     // 112px
+        16: '8rem',     // 128px
+      },
     },
   },
   plugins: [

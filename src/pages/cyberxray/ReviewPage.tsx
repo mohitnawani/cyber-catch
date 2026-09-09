@@ -19,7 +19,7 @@ export default function ReviewPage() {
   }
 
   return (
-    <section className="max-w-[915px] py-8 mx-auto">
+    <section className="max-w-[915px] py-8">
       <h1 className="font-montserrat text-[34px] font-bold leading-[34px] tracking-normal text-black">Review</h1>
       <div className="mt-5 rounded-2xl bg-white p-3 shadow-[0_4px_18px_rgba(15,41,64,0.06)]">
         <div className="space-y-4 p-[50px]">

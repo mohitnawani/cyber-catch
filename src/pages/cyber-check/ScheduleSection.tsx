@@ -26,7 +26,7 @@ export default function ScheduleSection() {
   const needsWeekday = interval === 'weekly' || interval === 'bi-weekly'
 
   return (
-    <section className="max-w-[680px] py-4 md:py-8 mx-auto">
+    <section className="max-w-[680px] py-4 md:py-8 overflow-auto">
       <div className="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full text-[#604BFF]">
         <CalendarDays size={26} strokeWidth={2} className="md:w-7 md:h-7" />
       </div>
