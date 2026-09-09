@@ -14,15 +14,10 @@ import LandingPage from './pages/cyberphisher/Landing_page'
 import CyberPhisherLayout from './layouts/CyberPhisherLayout'
 import OrganizationPage from './pages/organizations/OrganizationPage'
 import OrganizationProductsPage from './pages/organizations/OrganizationProductsPage'
-
-function ProductPage({ title }: { title: string }) {
-  return (
-    <section className="rounded-2xl border border-gray-light bg-white-pure p-6 shadow-[0_2px_12px_rgba(15,41,64,0.06)]">
-      <h1 className="text-xl font-bold text-navy">{title}</h1>
-      <p className="mt-2 text-sm text-navy/60">This product area is ready for its dashboard content.</p>
-    </section>
-  )
-}
+import CyberCheckPage from './pages/cyber-check/CyberCheckPage'
+import ScheduleSection from './pages/cyber-check/ScheduleSection'
+import FrameworkSection from './pages/cyber-check/FrameworkSection'
+import AgentSection from './pages/cyber-check/AgentSection'
 
 const App = () => {
   return (
@@ -35,7 +30,12 @@ const App = () => {
           <Route path="/cyber-xray/scan-urls" element={<ScanUrlsPage />} />
           <Route path="/cyber-xray/review" element={<ReviewPage />} />
         </Route>
-        <Route path="/cyber-check" element={<ProductPage title="Cyber Check" />} />
+        <Route path="/cyber-check" element={<CyberCheckPage />}>
+          <Route index element={<Navigate to="/cyber-check/schedule" replace />} />
+          <Route path="schedule" element={<ScheduleSection />} />
+          <Route path="framework" element={<FrameworkSection />} />
+          <Route path="agent" element={<AgentSection />} />
+        </Route>
         <Route path="/organization" element={<OrganizationPage />} />
         <Route path="/organization/:organizationId" element={<OrganizationProductsPage />} />
         <Route path="/cyber-phisher" element={<Navigate to="/cyber-phisher/campaigns" replace />} />

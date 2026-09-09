@@ -85,10 +85,10 @@ export default function MainDashboard() {
 
         <Card title="Cyber Breach Score" className="col-span-12 lg:col-span-2 order-6 row-span-2 flex flex-col justify-center gap-8">
           <div className="text-center">
-            <div className="text-3xl font-bold text-brand">73</div><div className="text-xs text-gray-mid">Score</div>
+            <div className="lg:text-[52px] font-[440px] font-ddin text-brand">73</div><div className="lg:text-[16px] text-[#8181A5]">Score</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-brand">5 %</div><div className="text-xs text-gray-mid">Potential breakdown</div>
+            <div className="lg:text-[52px]  text-brand font-[440px]">5 %</div><div className="lg:text-[16px]text-[#8181A5]">Potential breakdown</div>
           </div>
         </Card>
 
@@ -105,7 +105,7 @@ export default function MainDashboard() {
             </ResponsiveContainer>
           </div>
           <div className="flex gap-4 justify-center text-[11px] text-navy/60">
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-brand" /> Cyber Breach Score</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 text-4 rounded-full bg-brand" /> Cyber Breach Score</span>
             <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-sky" /> CyberCheck24x7 Score</span>
           </div>
         </Card>

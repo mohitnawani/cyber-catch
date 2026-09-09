@@ -24,11 +24,11 @@ export default function CyberCatchScoreChart() {
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-[13px] font-bold text-navy">CyberCatch Score</h3>
         <div className="flex items-center gap-2 text-[11px]">
-          <span className="text-gray-mid">All</span>
+          <span className="text-brand">All</span>
           <span className="px-2.5 py-1 rounded-full bg-brand text-white font-semibold">D</span>
-          <span className="text-gray-mid">W</span>
-          <span className="text-gray-mid">M</span>
-          <span className="text-gray-mid">Custom</span>
+          <span className="text-brand">W</span>
+          <span className="text-brand">M</span>
+          <span className="text-brand">Custom</span>
         </div>
       </div>
 
