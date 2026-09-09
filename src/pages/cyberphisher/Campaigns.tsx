@@ -48,7 +48,7 @@ export default function Campaigns() {
         </button>
       </div>
 
-      <div className="mt-6 grid grid-cols-[1.6fr_.8fr_1fr_1fr_.25fr] px-4 pb-2 text-[10px] font-semibold text-[#8586a3]">
+      <div className="mt-6 mx-auto grid grid-cols-[1.6fr_.8fr_1fr_1fr_.25fr] px-4 pb-2 text-[10px] font-semibold text-[#8586a3]">
         <span>Name</span>
         <span>Status</span>
         <span>Start Date</span>

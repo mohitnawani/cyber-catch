@@ -7,7 +7,7 @@ export default function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-[#F6F7F9] text-navy flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-[#F6F7F9] text-navy flex flex-col lg:flex-row mx-auto">
       {/* Mobile/Tablet Backdrop */}
       {isSidebarOpen && (
         <div

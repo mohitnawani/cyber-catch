@@ -27,7 +27,7 @@ export default function UploadUsersPage({
   const openPicker = () => fileInput.current?.click();
 
   return (
-    <section className="max-w-[920px] pt-1">
+    <section className="max-w-[920px] pt-1 mx-auto">
       <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">
         Import Using Excel
       </h2>

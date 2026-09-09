@@ -5,7 +5,7 @@ type Props = { onImport: () => void };
 
 export default function ImportUsersPage({ onImport }: Props) {
   return (
-    <section className="max-w-[920px] pt-1">
+    <section className="max-w-[920px] pt-1 mx-auto">
       <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">
         Import Users
       </h2>

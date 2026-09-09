@@ -28,7 +28,7 @@ export default function AgentSection() {
   }
 
   return (
-    <section className="max-w-[760px] py-6">
+    <section className="max-w-[760px] py-6 mx-auto">
       {/* Top Title & Regenerate Button */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-2xl font-bold tracking-tight text-navy">

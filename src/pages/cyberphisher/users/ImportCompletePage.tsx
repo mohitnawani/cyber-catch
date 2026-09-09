@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 
 export default function ImportCompletePage() {
   return (
-    <section className="max-w-[920px] pt-1">
+    <section className="max-w-[920px] pt-1 mx-auto">
       <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">
         User Records - Staging Area
       </h2>
