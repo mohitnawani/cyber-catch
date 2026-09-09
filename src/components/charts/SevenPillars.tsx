@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   BarChart3,
   Cloud,
@@ -6,95 +7,151 @@ import {
   Settings2,
   Users,
   Wifi,
-} from "lucide-react";
-
-interface BigCircle {
-  name: string;
-  className: string;
-}
+} from 'lucide-react'
 
 interface Pillar {
-  name: string;
-  icon: React.ElementType;
-  className: string;
+  id: string
+  name: string
+  icon: React.ElementType
+  className: string
+  bgHover: string
+  score: number
+  description: string
 }
-
-const bigCircles: BigCircle[] = [
-  { name: "Data Top", className: "left-[101px] top-[101px] bg-success/40" },
-  { name: "Data Bottom", className: "left-[101px] top-0 bg-success/40" },
-  { name: "People", className: "left-0 top-[101px] bg-slate-400/50" },
-  { name: "Networks", className: "right-0 top-[101px] bg-sky/50" },
-  { name: "Devices", className: "left-[101px] bottom-0 bg-danger/45" },
-];
 
 const pillars: Pillar[] = [
   {
-    name: "Workloads",
+    id: 'workloads',
+    name: 'Workloads',
     icon: Cloud,
-    className: "left-1/2 top-[4%] -translate-x-1/2 bg-success",
+    className: 'top-[4%] left-1/2 -translate-x-1/2 bg-success text-white',
+    bgHover: 'ring-success/50',
+    score: 88,
+    description: 'Cloud & container workloads security posture',
   },
   {
-    name: "Visibility & Analytics",
+    id: 'visibility',
+    name: 'Visibility & Analytics',
     icon: Eye,
-    className: "left-1/2 top-[17%] -translate-x-1/2 bg-success",
+    className: 'top-[18%] left-1/2 -translate-x-1/2 bg-success text-white',
+    bgHover: 'ring-success/50',
+    score: 92,
+    description: 'Continuous monitoring, telemetry & SIEM alerts',
   },
   {
-    name: "People",
+    id: 'people',
+    name: 'People',
     icon: Users,
-    className: "left-[6%] top-1/2 -translate-y-1/2 bg-[#0F2940]",
+    className: 'left-[4%] sm:left-[6%] top-1/2 -translate-y-1/2 bg-[#0F2940] text-white',
+    bgHover: 'ring-navy/50',
+    score: 74,
+    description: 'Security awareness, training & access control',
   },
   {
-    name: "Data",
+    id: 'data',
+    name: 'Data',
     icon: BarChart3,
-    className: "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-success",
+    className: 'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-success text-white',
+    bgHover: 'ring-success/50',
+    score: 95,
+    description: 'Encryption at rest and in transit, DLP',
   },
   {
-    name: "Networks",
+    id: 'networks',
+    name: 'Networks',
     icon: Wifi,
-    className: "right-[6%] top-1/2 -translate-y-1/2 bg-sky",
+    className: 'right-[4%] sm:right-[6%] top-1/2 -translate-y-1/2 bg-sky text-white',
+    bgHover: 'ring-sky/50',
+    score: 82,
+    description: 'Zero Trust segmentation & perimeter defense',
   },
   {
-    name: "Automatio & Orchestration",
+    id: 'automation',
+    name: 'Automation & Orchestration',
     icon: Settings2,
-    className: "left-1/2 bottom-[17%] -translate-x-1/2 bg-success",
+    className: 'bottom-[18%] left-1/2 -translate-x-1/2 bg-success text-white',
+    bgHover: 'ring-success/50',
+    score: 86,
+    description: 'Automated threat response & playbooks',
   },
   {
-    name: "Devices",
+    id: 'devices',
+    name: 'Devices',
     icon: Server,
-    className: "left-1/2 bottom-[4%] -translate-x-1/2 bg-danger",
+    className: 'bottom-[4%] left-1/2 -translate-x-1/2 bg-danger text-white',
+    bgHover: 'ring-danger/50',
+    score: 68,
+    description: 'Endpoint compliance & device vulnerability',
   },
-];
+]
 
-function SevenPillars() {
+export default function SevenPillars() {
+  const [activePillar, setActivePillar] = useState<Pillar | null>(null)
+
   return (
-    <div className="relative h-full w-full max-w-[332px] mx-auto overflow-hidden">
-      {/* outer rings */}
-      <div className="absolute left-1/2 top-1/2 h-[332px] w-[332px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[13px] border-success/60" />
-      <div className="absolute left-1/2 top-1/2 h-[263px] w-[263px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[13px] border-success/60 z-10" />
+    <div className="relative w-full max-w-[340px] sm:max-w-[370px] aspect-square mx-auto flex items-center justify-center p-3 select-none">
+      {/* Outer Pulse/Radar Ring */}
+      <div className="absolute inset-2 sm:inset-3 rounded-full border-[10px] sm:border-[12px] border-success/60 transition-all duration-700 hover:border-success/80 animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
 
-      {/* venn circles */}
-      {bigCircles.map((circle) => (
-        <div
-          key={circle.name}
-          className={`absolute h-[130px] w-[130px] rounded-full ${circle.className}`}
-        />
-      ))}
+      {/* Inner Concentric Ring */}
+      <div className="absolute inset-9 sm:inset-11 rounded-full border-[10px] sm:border-[12px] border-success/60 z-10 transition-transform duration-500" />
 
-      {/* pill labels */}
+      {/* Venn Circles Container */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {/* Top Circle */}
+        <div className="absolute top-[16%] left-1/2 -translate-x-1/2 w-[40%] aspect-square rounded-full bg-success/35 transition-all duration-300" />
+
+        {/* Center Circle */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] aspect-square rounded-full bg-success/30 transition-all duration-300" />
+
+        {/* Left Circle */}
+        <div className="absolute left-[16%] top-1/2 -translate-y-1/2 w-[40%] aspect-square rounded-full bg-slate-400/40 transition-all duration-300" />
+
+        {/* Right Circle */}
+        <div className="absolute right-[16%] top-1/2 -translate-y-1/2 w-[40%] aspect-square rounded-full bg-sky/45 transition-all duration-300" />
+
+        {/* Bottom Circle */}
+        <div className="absolute bottom-[16%] left-1/2 -translate-x-1/2 w-[40%] aspect-square rounded-full bg-danger/40 transition-all duration-300" />
+      </div>
+
+      {/* Pillar Pills */}
       {pillars.map((pillar) => {
-        const Icon = pillar.icon;
-        return (
-          <div
-            key={pillar.name}
-            className={`absolute z-10 flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-1 text-[7px] font-medium text-white shadow-sm ${pillar.className}`}
-          >
-            <Icon className="h-2.5 w-2.5 shrink-0" />
-            {pillar.name}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+        const Icon = pillar.icon
+        const isHovered = activePillar?.id === pillar.id
 
-export default SevenPillars;
+        return (
+          <button
+            key={pillar.id}
+            type="button"
+            onMouseEnter={() => setActivePillar(pillar)}
+            onMouseLeave={() => setActivePillar(null)}
+            onClick={() => setActivePillar(activePillar?.id === pillar.id ? null : pillar)}
+            className={`absolute z-20 flex items-center gap-1 sm:gap-1.5 whitespace-nowrap rounded-full px-2 sm:px-2.5 py-0.5 sm:py-1 text-[7.5px] sm:text-[8.5px] font-medium shadow-sm transition-all duration-300 cursor-pointer ${
+              pillar.className
+            } ${
+              isHovered
+                ? `scale-110 z-30 shadow-md ring-2 ring-white ${pillar.bgHover}`
+                : 'hover:scale-105'
+            }`}
+          >
+            <Icon className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
+            <span>{pillar.name}</span>
+          </button>
+        )
+      })}
+
+      {/* Interactive Tooltip on hover/touch */}
+      {activePillar && (
+        <div className="absolute -bottom-2 z-40 rounded-xl bg-navy/95 backdrop-blur-xs px-3 py-1.5 text-center text-white shadow-xl transition-all animate-in fade-in zoom-in-90 duration-200 pointer-events-none">
+          <p className="text-[10px] font-bold text-white flex items-center justify-center gap-1">
+            <span>{activePillar.name}</span>
+            <span className="text-emerald-400 font-mono">({activePillar.score}%)</span>
+          </p>
+          <p className="text-[8px] text-white/70 max-w-[200px] leading-tight">
+            {activePillar.description}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
