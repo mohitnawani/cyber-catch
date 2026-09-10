@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronDown, Plus, Globe, CheckCircle2, ShieldCheck } from 'lucide-react'
+import { ChevronDown, Plus } from 'lucide-react'
 import { useNavigate } from 'react-router'
 import Button from '../../components/ui/Button'
 
