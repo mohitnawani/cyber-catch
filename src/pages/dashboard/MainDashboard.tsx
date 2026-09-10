@@ -83,15 +83,16 @@ export default function MainDashboard() {
           <SevenPillars />
         </Card>
 
-        <Card title="Cyber Breach Score" className="col-span-12 md:col-span-6 lg:col-span-2 order-6 lg:row-span-2 flex flex-col justify-center gap-3">
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl lg:text-[44px] leading-none font-ddin text-brand">73</div><div className="mt-0.5 text-xs sm:text-sm text-[#8181A5]">Score</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl lg:text-[44px] leading-none text-brand">5 %</div><div className="mt-0.5 text-xs sm:text-sm text-[#8181A5]">Potential breakdown</div>
-          </div>
-        </Card>
-
+<Card title="Cyber Breach Score" className="col-span-12 md:col-span-6 lg:col-span-2 order-6 lg:row-span-2 flex flex-col gap-3">
+  <div className="text-center">
+    <div className="text-3xl sm:text-4xl lg:text-[44px] leading-none font-ddin text-brand">73</div>
+    <div className="mt-0.5 text-xs sm:text-sm text-[#8181A5]">Cyber Breach Score</div>
+  </div>
+  <div className="text-center">
+    <div className="text-3xl sm:text-4xl lg:text-[44px] leading-none text-brand">5 %</div>
+    <div className="mt-0.5 text-xs sm:text-sm text-[#8181A5]">CyberCheck247 Score</div>
+  </div>
+</Card>
         <Card title="CyberBenchmark" className="col-span-12 lg:col-span-5 order-7" action={<div className="flex flex-wrap gap-1.5 text-[11px]"><span className="text-gray-mid">All</span><span className="px-2 py-0.5 rounded-full bg-brand text-white">D</span><span className="text-gray-mid">W</span><span className="text-gray-mid">M</span><span className="text-gray-mid">Custom</span></div>}>
           <div className="h-[120px] sm:h-[140px]">
             <ResponsiveContainer width="100%" height="100%">

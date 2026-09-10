@@ -62,7 +62,7 @@ export default function CyberCatchScoreChart() {
   const [hoveredKey, setHoveredKey] = useState<SeriesKey | null>(null);
 
   return (
-    <div className="rounded-xl sm:rounded-2xl border border-gray-light bg-white-pure p-3 shadow-[0_2px_12px_rgba(15,41,64,0.06)] min-w-0">
+    <div className="h-full flex flex-col rounded-xl sm:rounded-2xl border border-gray-light bg-white-pure p-3 shadow-[0_2px_12px_rgba(15,41,64,0.06)] min-w-0">
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
         <h3 className="text-xs font-bold text-navy">CyberCatch Score</h3>
@@ -77,8 +77,8 @@ export default function CyberCatchScoreChart() {
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="relative h-[160px] sm:h-[180px]">
+      {/* Chart — flex-1 so it grows/shrinks to fill whatever height the card gets */}
+      <div className="relative flex-1 min-h-[160px]">
         <ResponsiveContainer width="100%" height="100%">
           <ReChart data={catchScoreData}>
             <XAxis

@@ -433,7 +433,7 @@ function AssignmentsModal({
       <p className="mt-1.5 text-[10px] text-navy/70">
         You can view and manage the assignments here.
       </p>
-      <div className="mt-2 rounded-lg bg-[#fafaff] p-2 text-[10px]">
+      <div className="mt-2 rounded-lg bg-[#fafaff] p-2 text-[10px] py-4">
         <div className="grid grid-cols-[1fr_1fr] px-2 pb-1.5 font-bold text-[#8586a3]">
           <span>Organization</span>
           <span>Industry</span>
