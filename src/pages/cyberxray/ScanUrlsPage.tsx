@@ -25,8 +25,8 @@ export default function ScanUrlsPage() {
   const visibleUrls = urls.length ? [...urls, ...sampleUrls] : []
 
   return (
-    <section className="relative w-full min-h-[480px] py-4 overflow-x-hidden">
-      <div className="flex flex-wrap items-start justify-between gap-2">
+    <section className="relative min-h-[480px] w-full max-w-[1080px] overflow-x-hidden pb-4 pt-6">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <h1 className="text-2xl sm:text-[28px] font-bold text-black">Setup Scan URLs</h1>
           <p className="mt-1 text-xs leading-4 text-black">These are URLs that our system will scan for vulnerabilities on a period basis.</p>
@@ -46,7 +46,8 @@ export default function ScanUrlsPage() {
           <div className="mt-5 flex flex-wrap items-center justify-center gap-2"><Button onClick={openPanel} className="px-4">Add URLs</Button><Button variant="ghost" onClick={() => navigate('/cyber-xray/review')}>Skip for now, I’ll add later</Button></div>
         </div>
       ) : (
-        <div className="mt-4">
+        <div className="mt-5 overflow-x-auto pb-1">
+          <div className="min-w-[560px]">
           <div className="grid grid-cols-[24px_minmax(0,1fr)_84px_24px] gap-1.5 px-2 pb-1.5 text-[10px] font-semibold text-navy/45"><span><input type="checkbox" /></span><span>URL</span><span>Status</span><span /></div>
           <div className="space-y-1.5">
             {visibleUrls.map((item) => (
@@ -60,6 +61,7 @@ export default function ScanUrlsPage() {
           </div>
           <div className="mt-3 flex flex-wrap justify-between gap-2 text-[10px] text-navy/45"><span>Showing {visibleUrls.length} of {visibleUrls.length} links</span><span>First&nbsp; 1 &nbsp;|&nbsp; 2 &nbsp;|&nbsp; 3 &nbsp;|&nbsp; Last</span></div>
           <Button onClick={() => navigate('/cyber-xray/review')} className="mt-4 w-[120px]">Continue</Button>
+          </div>
         </div>
       )}
 

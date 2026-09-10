@@ -28,7 +28,7 @@ export default function GroupsPage({
   const [openGroup, setOpenGroup] = useState<string | null>(null);
 
   return (
-    <section className="max-w-[920px] pt-1 mx-auto">
+    <section className="mx-auto w-full max-w-[920px] pt-6">
       <button
         onClick={onBack}
         className="flex items-center gap-1 text-xs font-semibold text-brand"
@@ -42,8 +42,8 @@ export default function GroupsPage({
         Add one or more members to User Groups. You will be able to assign User
         Groups to campaigns.
       </p>
-      <div className="mt-1 flex items-center gap-1.5">
-        <div className="flex h-6 w-[165px] items-center rounded-full bg-[#eff1ff] px-2 text-[10px] text-[#8b8daf]">
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <div className="flex h-8 w-full max-w-[220px] items-center rounded-full bg-[#eff1ff] px-3 text-[11px] text-[#8b8daf]">
           <Search size={12} className="mr-1.5" />
           Input
         </div>
@@ -55,19 +55,20 @@ export default function GroupsPage({
           Add New Group
         </button>
       </div>
-      <div className="mt-1">
-        <div className="grid grid-cols-[1.7fr_1fr_1fr_1fr_.5fr] px-3 pb-1 text-[10px] font-semibold text-[#8586a3]">
+      <div className="mt-5 overflow-x-auto pb-1">
+        <div className="min-w-[720px]">
+        <div className="grid grid-cols-[1.7fr_1fr_1fr_1fr_.5fr] px-4 pb-2 text-[10px] font-semibold text-[#8586a3]">
           <span>Group Name</span>
           <span>Total Members</span>
           <span>Risk Level</span>
           <span>Last Updated Date</span>
           <span>Actions</span>
         </div>
-        <div className="space-y-1">
+        <div className="space-y-2">
           {groups.map((group, index) => (
             <div
               key={group}
-              className="relative grid grid-cols-[1.7fr_1fr_1fr_1fr_.5fr] items-center rounded-lg bg-white px-3 py-1.5 text-[10px] shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+              className="relative grid grid-cols-[1.7fr_1fr_1fr_1fr_.5fr] items-center rounded-xl bg-white px-4 py-3 text-[11px] shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
             >
               <button
                 onClick={() => onManage(group)}
@@ -92,7 +93,7 @@ export default function GroupsPage({
                 <MoreHorizontal size={15} />
               </button>
               {openGroup === group && (
-                <div className="absolute right-3 top-8 z-10 w-32 rounded-md border border-[#e6e7f0] bg-white p-1 text-[10px] shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
+                <div className="absolute right-3 top-10 z-10 w-32 rounded-md border border-[#e6e7f0] bg-white p-1 text-[10px] shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
                   <button
                     onClick={() => {
                       setOpenGroup(null);
@@ -125,6 +126,7 @@ export default function GroupsPage({
               )}
             </div>
           ))}
+        </div>
         </div>
       </div>
     </section>

@@ -25,9 +25,9 @@ export default function SchedulePage() {
   const needsWeekday = interval === 'weekly' || interval === 'bi-weekly'
 
   return (
-    <section className="max-w-[620px] py-8">
+    <section className="max-w-[620px] pb-8 pt-6">
 
-      <h1 className="mt-5 text-lg font-bold tracking-tight text-navy lg:text-2xl">Select Your Test Schedule</h1>
+      <h1 className="text-lg font-bold tracking-tight text-navy lg:text-2xl">Select Your Test Schedule</h1>
       <p className="mt-3 text-xs leading-6 text-black font-ddin">Test will run on the interval and date/time you select.<br />Don't worry you can always change this later.</p>
 
       <div className="mt-4 w-full max-w-[380px] space-y-3">

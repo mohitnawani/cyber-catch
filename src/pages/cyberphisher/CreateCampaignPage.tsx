@@ -34,7 +34,7 @@ const emailTemplates = [
   "Custom-finance",
 ];
 const buttonClass =
-  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30 w-[180px] h-[40px]";
+  "inline-flex h-9 items-center justify-center rounded-md px-4 text-[11px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
 
 export default function CreateCampaignPage() {
   const navigate = useNavigate();
@@ -61,8 +61,8 @@ export default function CreateCampaignPage() {
   const saveCampaign = () => navigate("/cyber-phisher/campaigns");
 
   return (
-    <section className="w-full max-w-[920px] pb-2 pt-1 overflow-x-hidden">
-      <div className="flex items-start justify-between gap-1.5">
+    <section className="w-full max-w-[920px] overflow-x-hidden pb-6 pt-6">
+      <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h2 className="text-lg sm:text-[20px] font-bold tracking-[-0.03em] text-black">
             Create Campaign
@@ -79,8 +79,8 @@ export default function CreateCampaignPage() {
           <X size={16} />
         </button>
       </div>
-      <div className="mt-1 w-full max-w-[620px] space-y-1.5">
-        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+      <div className="mt-5 w-full max-w-[680px] space-y-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field
             label="Name"
             value={form.name}
@@ -93,7 +93,7 @@ export default function CreateCampaignPage() {
           />
         </div>
         <FormSection title="Please, choose one or more groups to associate as target groups for this campaign.">
-          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {form.groups.map((group, index) => (
               <div key={index}>
                 <div className="mb-0.5 flex items-center justify-between text-[10px] font-bold text-navy">
@@ -119,7 +119,7 @@ export default function CreateCampaignPage() {
           </div>
           <button
             onClick={addGroup}
-            className={`${buttonClass} mt-1 bg-brand text-white`}
+            className={`${buttonClass} mt-3 bg-brand text-white`}
           >
             <Plus size={12} className="mr-1" />
             Add Group
@@ -137,7 +137,7 @@ export default function CreateCampaignPage() {
           </label>
         </FormSection>
         <FormSection title="Please, set the dates for this campaign">
-          <div className="grid max-w-[300px] grid-cols-1 sm:grid-cols-2 gap-1.5">
+          <div className="grid max-w-[360px] grid-cols-1 gap-4 sm:grid-cols-2">
             <DateField
               label="Start Date"
               value={form.startDate}
@@ -161,7 +161,7 @@ export default function CreateCampaignPage() {
             />
           </label>
         </FormSection>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={saveCampaign}
             className={`${buttonClass} bg-brand text-white`}
@@ -189,7 +189,7 @@ function FormSection({
 }) {
   return (
     <div>
-      <p className="mb-1 text-xs leading-4 text-navy/80">{title}</p>
+      <p className="mb-2 text-xs leading-4 text-navy/80">{title}</p>
       {children}
     </div>
   );
@@ -210,7 +210,7 @@ function Field({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder="Input"
-        className="mt-0.5 block h-6 w-full rounded border border-[#e5e6ef] px-1.5 text-[10px] font-normal outline-none focus:border-brand"
+        className="mt-1 block h-9 w-full rounded-md border border-[#e5e6ef] px-3 text-[11px] font-normal outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/10"
       />
     </label>
   );
@@ -227,11 +227,11 @@ function SelectField({
   onChange: (value: string) => void;
 }) {
   return (
-    <div className="relative mt-0.5">
+    <div className="relative mt-1">
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-6 w-full appearance-none rounded border border-[#e5e6ef] bg-white px-1.5 pr-6 text-[10px] font-normal text-navy outline-none focus:border-brand"
+        className="h-9 w-full appearance-none rounded-md border border-[#e5e6ef] bg-white px-3 pr-8 text-[11px] font-normal text-navy outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/10"
       >
         <option value="">{placeholder}</option>
         {options.map((option) => (
@@ -241,8 +241,8 @@ function SelectField({
         ))}
       </select>
       <ChevronDown
-        size={12}
-        className="pointer-events-none absolute right-1.5 top-1.5 text-[#9899bc]"
+        size={14}
+        className="pointer-events-none absolute right-2.5 top-2.5 text-[#9899bc]"
       />
     </div>
   );
@@ -259,16 +259,16 @@ function DateField({
   return (
     <label className="block text-[10px] font-bold text-navy">
       {label}
-      <div className="relative mt-0.5">
+      <div className="relative mt-1">
         <input
           type="date"
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="h-6 w-full rounded border border-[#e5e6ef] bg-white px-1.5 pr-6 text-[10px] font-normal text-navy outline-none focus:border-brand"
+          className="h-9 w-full rounded-md border border-[#e5e6ef] bg-white px-3 pr-8 text-[11px] font-normal text-navy outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/10"
         />
         <CalendarDays
-          size={12}
-          className="pointer-events-none absolute right-1.5 top-1.5 text-[#9899bc]"
+          size={14}
+          className="pointer-events-none absolute right-2.5 top-2.5 text-[#9899bc]"
         />
       </div>
     </label>

@@ -19,7 +19,7 @@ export default function CyberPhisherLayout() {
     : 'Campaigns'
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-32px)] gap-2 lg:gap-3 max-w-[1440px] mx-auto overflow-hidden">
+    <div className="flex min-h-[calc(100vh-32px)] max-w-[1440px] flex-col gap-3 overflow-hidden px-3 py-3 mx-auto sm:px-4 lg:flex-row lg:gap-4 lg:px-0 lg:py-0">
       {/* Mobile/Tablet Steps Toggle Header */}
       <div className="flex lg:hidden items-center justify-between gap-2 rounded-xl border border-gray-light bg-white px-3 py-2 shadow-xs">
         <div className="flex min-w-0 items-center gap-2">
@@ -63,7 +63,7 @@ export default function CyberPhisherLayout() {
       </div>
 
       {/* Main Content */}
-      <main className="min-w-0 flex-1 py-1 lg:py-2 overflow-x-hidden overflow-y-auto">
+      <main className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto py-2 sm:py-3 lg:py-4">
         <Outlet />
       </main>
     </div>

@@ -7,7 +7,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useState } from "react";
 
 interface ScorePoint {
   name: string;
@@ -41,26 +40,23 @@ const seriesStyle = {
 
 type SeriesKey = keyof typeof seriesStyle;
 
-function CustomTooltip({ active, payload, hoveredKey }: any) {
-  if (!active || !payload?.length || !hoveredKey) return null;
-  const entry = payload.find((item: any) => item.dataKey === hoveredKey);
-  if (!entry) return null;
-  const style = seriesStyle[entry.dataKey as SeriesKey];
+function CustomTooltip({ active, payload, label }: any) {
+  if (!active || !payload?.length) return null;
+  const point = payload[0].payload as ScorePoint;
   return (
-    <div
-      className={`rounded-xl px-4 py-2 text-center shadow-[0_6px_18px_rgba(15,41,64,0.12)] ${style.boxClass}`}
-    >
-      <div className="text-sm font-bold leading-tight">{entry.value}</div>
-      <div className="mt-0.5 text-[10px] font-medium leading-tight opacity-70">
-        {entry.payload.date}
+    <div className="min-w-[150px] rounded-xl border border-[#e5e6ef] bg-white px-3 py-2.5 text-left shadow-[0_8px_22px_rgba(15,41,64,0.14)]">
+      <div className="text-[10px] font-semibold text-navy/60">{label} · {point.date}</div>
+      <div className="mt-2 space-y-1.5">
+        {payload.map((entry: any) => {
+          const style = seriesStyle[entry.dataKey as SeriesKey];
+          return <div key={entry.dataKey} className="flex items-center justify-between gap-4 text-[11px] text-navy"><span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full" style={{ backgroundColor: style.stroke }} />{style.label}</span><b>{entry.value}</b></div>;
+        })}
       </div>
     </div>
   );
 }
 
 export default function CyberCatchScoreChart() {
-  const [hoveredKey, setHoveredKey] = useState<SeriesKey | null>(null);
-
   return (
     <div className="h-full flex flex-col rounded-xl sm:rounded-2xl border border-gray-light bg-white-pure p-3 shadow-[0_2px_12px_rgba(15,41,64,0.06)] min-w-0">
       {/* Header */}
@@ -90,9 +86,7 @@ export default function CyberCatchScoreChart() {
             />
             <YAxis hide domain={[0, 70]} />
             <Tooltip
-              content={(props) => (
-                <CustomTooltip {...props} hoveredKey={hoveredKey} />
-              )}
+              content={<CustomTooltip />}
               cursor={{ stroke: "#E5E6EF", strokeWidth: 1 }}
               wrapperStyle={{ outline: "none" }}
             />
@@ -108,8 +102,6 @@ export default function CyberCatchScoreChart() {
                 stroke: "#fff",
                 strokeWidth: 1.5,
               }}
-              onMouseEnter={() => setHoveredKey("prev")}
-              onMouseLeave={() => setHoveredKey(null)}
             />
             <Line
               type="monotone"
@@ -123,8 +115,6 @@ export default function CyberCatchScoreChart() {
                 stroke: "#fff",
                 strokeWidth: 1.5,
               }}
-              onMouseEnter={() => setHoveredKey("avg")}
-              onMouseLeave={() => setHoveredKey(null)}
             />
           </ReChart>
         </ResponsiveContainer>

@@ -18,8 +18,8 @@ export default function GroupDetailsPage({
   onRemove,
 }: Props) {
   return (
-    <section className=" pt-1">
-      <div className="flex items-center justify-between">
+    <section className="mx-auto w-full max-w-[920px] pt-6">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <button
             onClick={onBack}
@@ -43,19 +43,20 @@ export default function GroupDetailsPage({
           Add Users
         </button>
       </div>
-      <div className="mt-2">
-        <div className="grid grid-cols-[34px_1.2fr_1.7fr_.4fr] px-3 pb-1 text-[10px] font-semibold text-[#8586a3]">
+      <div className="mt-5 overflow-x-auto pb-1">
+        <div className="min-w-[620px]">
+        <div className="grid grid-cols-[34px_1.2fr_1.7fr_.4fr] px-4 pb-2 text-[10px] font-semibold text-[#8586a3]">
           <span></span>
           <span>Name</span>
           <span>Email</span>
           <span></span>
         </div>
-        <div className="space-y-1">
+        <div className="space-y-2">
           {members.length ? (
             members.map((member) => (
               <div
                 key={member.id}
-                className="grid grid-cols-[34px_1.2fr_1.7fr_.4fr] items-center rounded-xl bg-white px-3 py-1.5 text-[11px] shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+                className="grid grid-cols-[34px_1.2fr_1.7fr_.4fr] items-center rounded-xl bg-white px-4 py-3 text-[11px] shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
               >
                 <span className="h-4 w-4 rounded-[3px] border border-[#bcc1dc]" />
                 <span className="font-bold text-navy">{member.name}</span>
@@ -74,6 +75,7 @@ export default function GroupDetailsPage({
               No users in this group.
             </p>
           )}
+        </div>
         </div>
       </div>
     </section>

@@ -18,7 +18,7 @@ export default function StagingUsersPage({
 }: Props) {
   const allSelected = selected.length === members.length;
   return (
-    <section className="max-w-[920px] pt-1 mx-auto">
+    <section className="max-w-[920px] pt-6 mx-auto">
       <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">
         User Records - Staging Area
       </h2>
