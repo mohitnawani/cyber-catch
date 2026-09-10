@@ -34,7 +34,7 @@ const emailTemplates = [
   "Custom-finance",
 ];
 const buttonClass =
-  "inline-flex h-9 items-center justify-center rounded-md px-4 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
 
 export default function CreateCampaignPage() {
   const navigate = useNavigate();
@@ -61,26 +61,33 @@ export default function CreateCampaignPage() {
   const saveCampaign = () => navigate("/cyber-phisher/campaigns");
 
   return (
+<<<<<<< HEAD
     <section className=" pb-8 pt-1">
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">
+=======
+    <section className="w-full max-w-[920px] pb-4 pt-1 overflow-x-hidden">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h2 className="text-lg sm:text-[20px] font-bold tracking-[-0.03em] text-black">
+>>>>>>> 0fdcb40 (commited)
             Create Campaign
           </h2>
-          <p className="mt-2 text-xs text-navy/75">
+          <p className="mt-1 text-xs leading-4 text-navy/75">
             Please, fill these fields to create new campaign.
           </p>
         </div>
         <button
           onClick={() => navigate("/cyber-phisher/campaigns")}
           aria-label="Close create campaign"
-          className="text-[#9899bc] hover:text-navy"
+          className="shrink-0 text-[#9899bc] hover:text-navy"
         >
-          <X size={18} />
+          <X size={16} />
         </button>
       </div>
-      <div className="mt-5 max-w-155 space-y-6">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="mt-3 w-full max-w-[620px] space-y-3">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Field
             label="Name"
             value={form.name}
@@ -93,7 +100,7 @@ export default function CreateCampaignPage() {
           />
         </div>
         <FormSection title="Please, choose one or more groups to associate as target groups for this campaign.">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {form.groups.map((group, index) => (
               <div key={index}>
                 <div className="mb-1 flex items-center justify-between text-[10px] font-bold text-navy">
@@ -119,14 +126,14 @@ export default function CreateCampaignPage() {
           </div>
           <button
             onClick={addGroup}
-            className={`${buttonClass} mt-3 bg-brand text-white`}
+            className={`${buttonClass} mt-2 bg-brand text-white`}
           >
-            <Plus size={13} className="mr-1" />
+            <Plus size={12} className="mr-1" />
             Add Group
           </button>
         </FormSection>
         <FormSection title="Please, add landing page to associate with this campaign">
-          <label className="block max-w-60 text-[10px] font-bold text-navy">
+          <label className="block max-w-[240px] text-[10px] font-bold text-navy">
             Landing page
             <SelectField
               value={form.landingPage}
@@ -137,7 +144,7 @@ export default function CreateCampaignPage() {
           </label>
         </FormSection>
         <FormSection title="Please, set the dates for this campaign">
-          <div className="grid max-w-75 grid-cols-2 gap-3">
+          <div className="grid max-w-[300px] grid-cols-1 sm:grid-cols-2 gap-2">
             <DateField
               label="Start Date"
               value={form.startDate}
@@ -151,7 +158,7 @@ export default function CreateCampaignPage() {
           </div>
         </FormSection>
         <FormSection title="Please, select email template for this campaign">
-          <label className="block max-w-60 text-[10px] font-bold text-navy">
+          <label className="block max-w-[240px] text-[10px] font-bold text-navy">
             Email template
             <SelectField
               value={form.emailTemplate}
@@ -161,7 +168,7 @@ export default function CreateCampaignPage() {
             />
           </label>
         </FormSection>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={saveCampaign}
             className={`${buttonClass} bg-brand text-white`}
@@ -189,7 +196,7 @@ function FormSection({
 }) {
   return (
     <div>
-      <p className="mb-3 text-xs text-navy/80">{title}</p>
+      <p className="mb-1.5 text-xs leading-4 text-navy/80">{title}</p>
       {children}
     </div>
   );

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const products = ["Cyber Check 24/7", "Cyber X-Ray", "Cyber Phisher"];
 const buttonClass =
-  "inline-flex h-9 items-center justify-center rounded-md px-4 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
 
 type Props = {
   parentName: string;
@@ -27,7 +27,7 @@ export default function AddChildOrganizationModal({
     );
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4 mx-auto backdrop-blur-sm">
-      <div className="relative w-full max-w-90 rounded-sm bg-white p-7 shadow-[0_18px_45px_rgba(15,41,64,0.2)]">
+      <div className="relative w-full max-w-[360px] rounded-xl bg-white p-4 sm:p-5 shadow-[0_18px_45px_rgba(15,41,64,0.2)]">
         <button
           onClick={onClose}
           aria-label="Close"

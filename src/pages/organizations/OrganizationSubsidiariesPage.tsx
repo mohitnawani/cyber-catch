@@ -17,7 +17,7 @@ export default function OrganizationSubsidiariesPage({
         {children.map((child, index) => (
           <div
             key={`${child}-${index}`}
-            className="grid min-h-11 grid-cols-[1.2fr_1.5fr_.5fr] items-center rounded-xl bg-white px-4 py-3 text-[10px] text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+            className="grid min-h-[40px] grid-cols-[1.2fr_1.5fr_.5fr] items-center rounded-xl bg-white px-4 py-3 text-[10px] text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
           >
             <span>{child}</span>
             <span>Industry area name</span>

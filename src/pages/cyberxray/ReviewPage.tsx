@@ -19,24 +19,24 @@ export default function ReviewPage() {
   }
 
   return (
-    <section className="max-w-[915px] py-8">
-      <h1 className="font-montserrat text-[34px] font-bold leading-[34px] tracking-normal text-black">Review</h1>
-      <div className="mt-5 rounded-2xl bg-white p-3 shadow-[0_4px_18px_rgba(15,41,64,0.06)]">
-        <div className="space-y-4 p-[50px]">
+    <section className="w-full max-w-[915px] py-4 overflow-x-hidden">
+      <h1 className="font-montserrat text-xl sm:text-2xl lg:text-[28px] font-bold leading-tight tracking-normal text-black">Review</h1>
+      <div className="mt-3 rounded-2xl bg-white p-3 sm:p-4 shadow-[0_4px_18px_rgba(15,41,64,0.06)]">
+        <div className="space-y-2 p-3 sm:p-5 lg:p-6">
           {acknowledgements.map((acknowledgement, index) => (
-            <label key={acknowledgement} className="flex cursor-pointer items-start gap-8">
+            <label key={acknowledgement} className="flex cursor-pointer items-start gap-2.5 sm:gap-3">
               <input
                 type="checkbox"
                 checked={confirmed[index]}
                 onChange={() => toggleAcknowledgement(index)}
-                className="mt-[7px] h-4 w-4 accent-brand"
+                className="mt-1 h-3.5 w-3.5 shrink-0 accent-brand"
               />
-              <span className="font-ddin  font-bold tracking-normal text-black">{acknowledgement}</span>
+              <span className="font-ddin text-xs sm:text-sm font-bold leading-5 tracking-normal text-black">{acknowledgement}</span>
             </label>
           ))}
         </div>
       </div>
-      <Button disabled={!ready} onClick={() => navigate('/')} className="mt-7 px-5 py-3 text-lg">All Good, Go to Dashboard</Button>
+      <Button disabled={!ready} onClick={() => navigate('/')} className="mt-4 px-4">All Good, Go to Dashboard</Button>
     </section>
   )
 }

@@ -18,7 +18,7 @@ const initialOrganizations: Organization[] = Array.from(
   }),
 );
 const buttonClass =
-  "inline-flex h-9 items-center justify-center rounded-md px-4 text-[13px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[13px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
 
 export default function OrganizationPage() {
   // Stores the organizations displayed in the listing.
@@ -90,23 +90,23 @@ export default function OrganizationPage() {
           <h1 className="text-[27px] font-bold tracking-[-0.03em] text-black">
             Organizations
           </h1>
-          <p className="mt-2 text-[15px] leading-[20px] text-navy/75">
+          <p className="mt-1 text-xs sm:text-[13px] leading-5 text-navy/75">
             Manage the organizations connected to your account.
           </p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className={`${buttonClass} bg-brand text-white`}
+          className={`${buttonClass} shrink-0 bg-brand text-white`}
         >
-          <Plus size={13} className="mr-1" />
+          <Plus size={12} className="mr-1" />
           Create an Organization
         </button>
       </div>
       {organizations.length ? (
         <>
-          <div className="mt-5 flex justify-end">
-            <div className="flex h-8 w-41.25 items-center rounded-full bg-[#eff1ff] px-3 text-[13px] text-[#8b8daf]">
-              <Search size={12} className="mr-2" />
+          <div className="mt-3 flex justify-start sm:justify-end">
+            <div className="flex h-7 w-full sm:w-[165px] items-center rounded-full bg-[#eff1ff] px-3 text-xs text-[#8b8daf]">
+              <Search size={12} className="mr-2 shrink-0" />
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
@@ -115,13 +115,13 @@ export default function OrganizationPage() {
               />
             </div>
           </div>
-          <div className="mt-4 space-y-2">
+          <div className="mt-3 space-y-1.5">
             {shownOrganizations.map((organization) => (
               <div
                 key={organization.id}
-                className="relative flex min-h-11 items-center justify-between rounded-xl bg-white px-4 py-3 text-[13px] text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+                className="relative flex min-h-[38px] items-center justify-between gap-2 rounded-xl bg-white px-3 py-2 text-xs text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
               >
-                <span>{organization.name}</span>
+                <span className="truncate">{organization.name}</span>
                 <button
                   title="Organization actions"
                   onClick={() =>
@@ -129,15 +129,15 @@ export default function OrganizationPage() {
                       current === organization.id ? null : organization.id,
                     )
                   }
-                  className="text-[#8586a3]"
+                  className="shrink-0 text-[#8586a3] hover:text-brand"
                 >
-                  <MoreHorizontal size={17} />
+                  <MoreHorizontal size={15} />
                 </button>
                 {openMenu === organization.id && (
-                  <div className="absolute right-3 top-9 z-10 w-36 rounded-md border border-[#e6e7f0] bg-white p-1 text-[13px] shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
+                  <div className="absolute right-3 top-8 z-10 w-36 rounded-md border border-[#e6e7f0] bg-white p-1 text-xs shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
                     <button
                       onClick={() => openEditModal(organization)}
-                      className="block w-full rounded px-2 py-2 text-left hover:bg-[#f5f6ff]"
+                      className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
                     >
                       Change Details
                     </button>
@@ -146,13 +146,13 @@ export default function OrganizationPage() {
                         setOpenMenu(null);
                         navigate(`/organization/${organization.id}`);
                       }}
-                      className="block w-full rounded px-2 py-2 text-left hover:bg-[#f5f6ff]"
+                      className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
                     >
                       Manage Organization
                     </button>
                     <button
                       onClick={() => setOpenMenu(null)}
-                      className="block w-full rounded px-2 py-2 text-left hover:bg-[#f5f6ff]"
+                      className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
                     >
                       Add Child Organization
                     </button>
@@ -161,12 +161,12 @@ export default function OrganizationPage() {
               </div>
             ))}
           </div>
-          <div className="mt-4 flex justify-end text-[13px] text-[#8586a3]">
+          <div className="mt-3 flex flex-wrap justify-end gap-1 text-xs text-[#8586a3]">
             First&nbsp; 1&nbsp; | 2&nbsp; | 3&nbsp; | 4&nbsp; | 5&nbsp; | Last
           </div>
         </>
       ) : (
-        <div className="mt-5 flex items-center justify-between rounded-md border-2 border-brand bg-white px-4 py-3 text-[13px] shadow-[0_4px_14px_rgba(15,41,64,0.05)]">
+        <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-md border-2 border-brand bg-white px-3 py-2 text-xs shadow-[0_4px_14px_rgba(15,41,64,0.05)]">
           <div>
             <p className="font-bold text-navy">
               There are no organizations yet
@@ -185,9 +185,11 @@ export default function OrganizationPage() {
         </div>
       )}
       {!organizations.length && (
-        <div className="mt-20 flex flex-col items-center text-navy/35">
-          <Building2 size={34} />
-          <span className="mt-2 text-[15px]">No organizations</span>
+        <div className="mt-10 flex flex-col items-center text-navy/35">
+          <span className="flex h-9 w-9 items-center justify-center rounded-[12px] bg-[#5E81F41A] text-brand">
+            <Building2 size={20} strokeWidth={1.8} className="h-5 w-5 object-contain" />
+          </span>
+          <span className="mt-1.5 text-xs">No organizations</span>
         </div>
       )}
       {isModalOpen && (

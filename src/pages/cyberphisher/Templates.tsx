@@ -104,7 +104,7 @@ const emptyForm: TemplateForm = {
 };
 
 const buttonClass =
-  "inline-flex h-9 items-center justify-center rounded-md px-4 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
 
 export default function Templates() {
   // Stores the current template rows shown in the list.
@@ -161,17 +161,24 @@ export default function Templates() {
   };
 
   return (
+<<<<<<< HEAD
     <section className=" pt-1">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">
+=======
+    <section className="w-full max-w-[920px] pt-1 overflow-x-hidden">
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h2 className="text-lg sm:text-[20px] font-bold tracking-[-0.03em] text-black">
+>>>>>>> 0fdcb40 (commited)
             Email Templates
           </h2>
-          <p className="mt-2 text-xs leading-5 text-navy/75">
+          <p className="mt-1 text-xs leading-4 text-navy/75">
             In this section you can manage your email templates.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5">
           <button
             className={`${buttonClass} border border-brand bg-white text-brand`}
           >
@@ -186,7 +193,7 @@ export default function Templates() {
         </div>
       </div>
 
-      <div className="mt-5 flex h-8 w-41.25 items-center rounded-full bg-[#eff1ff] px-3 text-[10px] text-[#8b8daf]">
+      <div className="mt-3 flex h-7 w-full sm:w-[165px] items-center rounded-full bg-[#eff1ff] px-3 text-[10px] text-[#8b8daf]">
         <span className="mr-2">⌕</span>
         <input
           value={query}
@@ -196,13 +203,13 @@ export default function Templates() {
         />
       </div>
 
-      <div className="mt-4 space-y-2">
+      <div className="mt-3 space-y-1.5">
         {shownTemplates.map((template) => (
           <div
             key={template.id}
-            className="relative flex min-h-11 items-center justify-between rounded-xl bg-white px-4 py-3 text-[10px] text-navy shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+            className="relative flex min-h-[38px] items-center justify-between gap-2 rounded-xl bg-white px-3 py-2 text-[10px] text-navy shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
           >
-            <span className="font-bold">{template.name}</span>
+            <span className="truncate font-bold">{template.name}</span>
             <button
               title={`Actions for ${template.name}`}
               onClick={() =>
@@ -210,15 +217,15 @@ export default function Templates() {
                   current === template.id ? null : template.id,
                 )
               }
-              className="text-[#8586a3] hover:text-brand"
+              className="shrink-0 text-[#8586a3] hover:text-brand"
             >
-              <MoreHorizontal size={17} />
+              <MoreHorizontal size={15} />
             </button>
             {openMenu === template.id && (
-              <div className="absolute right-3 top-9 z-10 w-28 rounded-md border border-[#e6e7f0] bg-white p-1 text-[10px] shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
+              <div className="absolute right-3 top-8 z-10 w-28 rounded-md border border-[#e6e7f0] bg-white p-1 text-[10px] shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
                 <button
                   onClick={() => openEdit(template)}
-                  className="block w-full rounded px-2 py-2 text-left hover:bg-[#f5f6ff]"
+                  className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
                 >
                   Change
                 </button>
@@ -229,7 +236,7 @@ export default function Templates() {
                     );
                     setOpenMenu(null);
                   }}
-                  className="block w-full rounded px-2 py-2 text-left text-[#d04e4e] hover:bg-[#fff2f2]"
+                  className="block w-full rounded px-2 py-1.5 text-left text-[#d04e4e] hover:bg-[#fff2f2]"
                 >
                   Archive
                 </button>
@@ -240,7 +247,7 @@ export default function Templates() {
       </div>
 
       {!shownTemplates.length && (
-        <p className="mt-4 rounded-xl bg-white p-6 text-center text-xs text-navy/55">
+        <p className="mt-3 rounded-xl bg-white p-4 text-center text-xs text-navy/55">
           No templates found.
         </p>
       )}
@@ -276,7 +283,7 @@ function TemplateModal({
 }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4">
-      <div className="relative w-full max-w-90 rounded-sm bg-white p-7 shadow-[0_18px_45px_rgba(15,41,64,0.2)]">
+      <div className="relative w-full max-w-[360px] rounded-xl bg-white p-4 sm:p-5 shadow-[0_18px_45px_rgba(15,41,64,0.2)]">
         <button
           onClick={onClose}
           className="absolute right-5 top-5 text-[#9899bc] hover:text-navy"
@@ -290,7 +297,7 @@ function TemplateModal({
         <p className="mt-2 text-[10px] text-navy/70">
           You can create an email template from scratch here.
         </p>
-        <div className="mt-5 space-y-3">
+        <div className="mt-3 space-y-2">
           <Field
             label="Name"
             value={form.name}
@@ -309,7 +316,7 @@ function TemplateModal({
               className="mt-1 block h-20 w-full resize-none rounded border border-[#e5e6ef] p-2 text-[10px] font-normal outline-none focus:border-brand"
             />
           </label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <Field
               label="Link Title"
               value={form.linkTitle}
@@ -322,10 +329,10 @@ function TemplateModal({
             />
           </div>
         </div>
-        <div className="mt-7 flex gap-3">
+        <div className="mt-4 flex gap-2">
           <button
             onClick={onSave}
-            className={`${buttonClass} min-w-22.5 bg-brand text-white`}
+            className={`${buttonClass} min-w-[90px] bg-brand text-white`}
           >
             Save
           </button>

@@ -43,7 +43,7 @@ export default function DashboardLayout() {
           <User size={18} className="text-navy/70" />
         </header>
 
-        <main className="p-3 sm:p-5 lg:p-6 bg-[#F6F7F9] min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-32px)] overflow-auto">
+        <main className="p-3 sm:p-4 bg-[#F6F7F9] min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-32px)] overflow-x-hidden overflow-y-auto">
           <Outlet />
         </main>
       </div>

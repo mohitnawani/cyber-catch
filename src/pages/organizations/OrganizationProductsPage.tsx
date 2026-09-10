@@ -17,7 +17,7 @@ const initialProducts: Product[] = [
   { id: 6, name: "Product name", active: false },
 ];
 const buttonClass =
-  "inline-flex h-9 items-center justify-center rounded-md px-4 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
 
 export default function OrganizationProductsPage() {
   const navigate = useNavigate();
@@ -56,22 +56,22 @@ export default function OrganizationProductsPage() {
     setIsChildModalOpen(false);
   };
   return (
-    <section className="max-w-230 pt-1 mx-auto ">
+    <section className="w-full max-w-[920px] pt-1 mx-auto overflow-x-hidden">
       <button
         onClick={() => navigate("/organization")}
         className="flex items-center gap-1 text-xs font-semibold text-brand"
       >
-        <ChevronLeft size={15} /> Organizations
+        <ChevronLeft size={14} /> Organizations
       </button>
-      <div className="mt-3 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <p className="text-[10px] text-navy/50">
+      <div className="mt-2 flex flex-wrap items-start justify-between gap-2">
+        <div className="min-w-0">
+          <p className="text-[10px] text-navy/50 truncate">
             Organizations / {organizationTitle}
           </p>
-          <h1 className="mt-2 text-[24px] font-bold tracking-[-0.03em] text-black">
+          <h1 className="mt-1 text-lg sm:text-[20px] font-bold tracking-[-0.03em] text-black">
             {organizationTitle}
           </h1>
-          <nav className="mt-4 flex gap-5 text-[10px] font-semibold text-navy/60">
+          <nav className="mt-2 flex gap-3 sm:gap-4 overflow-x-auto text-[10px] font-semibold text-navy/60">
             <button
               onClick={() => setActiveTab("general")}
               className={
@@ -114,7 +114,7 @@ export default function OrganizationProductsPage() {
             </button>
           </nav>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-1.5">
           {(activeTab === "general" || activeTab === "subsidiaries") && (
             <button
               onClick={() => setIsChildModalOpen(true)}
@@ -132,7 +132,7 @@ export default function OrganizationProductsPage() {
           )}
           {activeTab === "products" && (
             <button className={`${buttonClass} bg-brand text-white`}>
-              <Plus size={13} className="mr-1" />
+              <Plus size={12} className="mr-1" />
               Add New Product
             </button>
           )}
@@ -144,20 +144,20 @@ export default function OrganizationProductsPage() {
         </div>
       </div>
       {activeTab === "general" && (
-        <div className="mt-5">
+        <div className="mt-3">
           <OrganizationGeneralPage />
-          <div className="mt-8">
-            <h2 className="text-base font-bold text-black">
+          <div className="mt-4">
+            <h2 className="text-sm font-bold text-black">
               Child Organizations
             </h2>
-            <div className="mt-3 space-y-2">
+            <div className="mt-2 space-y-1.5">
               {children.map((child, index) => (
                 <div
                   key={`${child}-${index}`}
-                  className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-[10px] text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+                  className="flex items-center justify-between gap-2 rounded-xl bg-white px-3 py-2 text-[10px] text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
                 >
-                  <span>{child}</span>
-                  <button className="text-[#8586a3]">•••</button>
+                  <span className="truncate">{child}</span>
+                  <button className="shrink-0 text-[#8586a3]">•••</button>
                 </div>
               ))}
             </div>
@@ -165,23 +165,23 @@ export default function OrganizationProductsPage() {
         </div>
       )}
       {activeTab === "products" && (
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-3 grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <article
               key={product.id}
-              className="rounded-lg bg-white p-4 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+              className="rounded-lg bg-white p-3 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
             >
-              <div className="flex items-center justify-between">
-                <h2 className="text-[10px] font-bold text-navy">
+              <div className="flex items-center justify-between gap-2">
+                <h2 className="text-[10px] font-bold text-navy truncate">
                   {product.name}
                 </h2>
                 <span
-                  className={`rounded-full px-3 py-1 text-[9px] font-semibold ${product.active ? "bg-[#c5f8dd] text-[#12a35d]" : "bg-[#eff1ff] text-[#8586a3]"}`}
+                  className={`shrink-0 rounded-full px-2.5 py-0.5 text-[9px] font-semibold ${product.active ? "bg-[#c5f8dd] text-[#12a35d]" : "bg-[#eff1ff] text-[#8586a3]"}`}
                 >
                   {product.active ? "Active" : "Not Active"}
                 </span>
               </div>
-              <div className="mt-9 flex items-center justify-between text-[9px] text-navy/60">
+              <div className="mt-4 flex items-center justify-between text-[9px] text-navy/60">
                 <button className="text-brand">Configure</button>
                 <button
                   onClick={() => setPendingProduct(product)}

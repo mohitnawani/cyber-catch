@@ -21,9 +21,9 @@ const productData = [
 
 function Card({ title, action, children, className = '' }: { title: string; action?: React.ReactNode; children: React.ReactNode; className?: string }) {
   return (
-    <div className={`rounded-2xl border border-gray-light bg-white-pure p-4 shadow-[0_2px_12px_rgba(15,41,64,0.06)] ${className}`}>
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-[13px] font-bold text-navy">{title}</h3>
+    <div className={`rounded-xl sm:rounded-2xl border border-gray-light bg-white-pure p-3 shadow-[0_2px_12px_rgba(15,41,64,0.06)] min-w-0 ${className}`}>
+      <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+        <h3 className="text-xs font-bold text-navy">{title}</h3>
         {action}
       </div>
       {children}
@@ -34,15 +34,15 @@ function Card({ title, action, children, className = '' }: { title: string; acti
 
 export default function MainDashboard() {
   return (
-    <div className="space-y-4 max-w-[1280px] mx-auto">
-      <div className="grid grid-cols-12 gap-4">
+    <div className="w-full space-y-2 max-w-[1280px] mx-auto overflow-x-hidden">
+      <div className="grid grid-cols-12 gap-2 sm:gap-2">
 
-        <div className="col-span-12 lg:col-span-5 order-1">
+        <div className="col-span-12 md:col-span-6 lg:col-span-5 order-1 min-w-0">
           <CyberCatchScoreChart />
         </div>
 
-        <Card title="Total Test Conducted by Product" className="col-span-12 lg:col-span-4 order-3">
-          <div className="h-[190px]">
+        <Card title="Total Test Conducted by Product" className="col-span-12 md:col-span-6 lg:col-span-4 order-3">
+          <div className="h-[160px] sm:h-[190px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={productData} barCategoryGap={18}>
                 <XAxis dataKey="name" hide />
@@ -62,38 +62,38 @@ export default function MainDashboard() {
           </div>
         </Card>
 
-        <div className="col-span-12 lg:col-span-5 order-4 grid grid-cols-3 gap-2" style={{ paddingLeft: '4px' }}>
+        <div className="col-span-12 md:col-span-6 lg:col-span-5 order-4 grid grid-cols-3 gap-1.5 sm:gap-2">
           {[
             { v: '464', label: 'Cyber X-Ray Score', color: 'text-brand', bg: 'bg-brand/10' },
             { v: '126', label: 'CyberCheck24x7 Score', color: 'text-brand', bg: 'bg-brand/10' },
             { v: '356', label: 'CyberPhisher Score', color: 'text-brand', bg: 'bg-brand/10' },
           ].map(c => (
-            <div key={c.label} className="min-w-0 rounded-2xl border border-gray-light bg-white-pure p-4 flex flex-col justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)]" style={{ height: '123px' }}>
-              <div className={`text-5xl font-bold ${c.color}`} style={{ fontFamily: '"D-DIN", "DIN Alternate", "Montserrat", sans-serif', fontWeight: '400', lineHeight: '1', letterSpacing: '0%' }}>{c.v}</div>
-              <div className="text-[11px] text-navy mt-1 leading-tight flex items-center gap-1">{c.label}</div>
+            <div key={c.label} className="min-w-0 rounded-xl border border-gray-light bg-white-pure p-2.5 sm:p-3 flex flex-col justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)] min-h-[96px]">
+              <div className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${c.color}`} style={{ fontFamily: '"D-DIN", "DIN Alternate", "Montserrat", sans-serif', fontWeight: '400', lineHeight: '1', letterSpacing: '0%' }}>{c.v}</div>
+              <div className="text-[10px] sm:text-[11px] text-navy mt-1 leading-tight break-words">{c.label}</div>
             </div>
           ))}
         </div>
 
-        <Card title="CyberPhisher Severity Breakdown" className="col-span-12 lg:col-span-3 order-2">
+        <Card title="CyberPhisher Severity Breakdown" className="col-span-12 md:col-span-6 lg:col-span-3 order-2">
           <SeverityChart />
         </Card>
 
-        <Card title="7 Pillars" className="col-span-12 lg:col-span-5 order-5 row-span-2">
+        <Card title="7 Pillars" className="col-span-12 md:col-span-6 lg:col-span-5 order-5 lg:row-span-2">
           <SevenPillars />
         </Card>
 
-        <Card title="Cyber Breach Score" className="col-span-12 lg:col-span-2 order-6 row-span-2 flex flex-col justify-center gap-8">
+        <Card title="Cyber Breach Score" className="col-span-12 md:col-span-6 lg:col-span-2 order-6 lg:row-span-2 flex flex-col justify-center gap-3">
           <div className="text-center">
-            <div className="lg:text-[52px] font-[440px] font-ddin text-brand">73</div><div className="lg:text-[16px] text-[#8181A5]">Score</div>
+            <div className="text-3xl sm:text-4xl lg:text-[44px] leading-none font-ddin text-brand">73</div><div className="mt-0.5 text-xs sm:text-sm text-[#8181A5]">Score</div>
           </div>
           <div className="text-center">
-            <div className="lg:text-[52px]  text-brand font-[440px]">5 %</div><div className="lg:text-[16px]text-[#8181A5]">Potential breakdown</div>
+            <div className="text-3xl sm:text-4xl lg:text-[44px] leading-none text-brand">5 %</div><div className="mt-0.5 text-xs sm:text-sm text-[#8181A5]">Potential breakdown</div>
           </div>
         </Card>
 
-        <Card title="CyberBenchmark" className="col-span-12 lg:col-span-5 order-7" action={<div className="flex gap-2 text-[11px]"><span className="text-gray-mid">All</span><span className="px-2 py-0.5 rounded-full bg-brand text-white">D</span><span className="text-gray-mid">W</span><span className="text-gray-mid">M</span><span className="text-gray-mid">Custom</span></div>}>
-          <div className="h-[140px]">
+        <Card title="CyberBenchmark" className="col-span-12 lg:col-span-5 order-7" action={<div className="flex flex-wrap gap-1.5 text-[11px]"><span className="text-gray-mid">All</span><span className="px-2 py-0.5 rounded-full bg-brand text-white">D</span><span className="text-gray-mid">W</span><span className="text-gray-mid">M</span><span className="text-gray-mid">Custom</span></div>}>
+          <div className="h-[120px] sm:h-[140px]">
             <ResponsiveContainer width="100%" height="100%">
               <ReChart data={catchScoreData}>
                 <XAxis dataKey="name" stroke="#AAAAAA" fontSize={10} tickLine={false} axisLine={false} />
@@ -104,8 +104,8 @@ export default function MainDashboard() {
               </ReChart>
             </ResponsiveContainer>
           </div>
-          <div className="flex gap-4 justify-center text-[11px] text-navy/60">
-            <span className="flex items-center gap-1"><span className="w-2 h-2 text-4 rounded-full bg-brand" /> Cyber Breach Score</span>
+          <div className="flex flex-wrap gap-2 justify-center text-[11px] text-navy/60">
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-brand" /> Cyber Breach Score</span>
             <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-sky" /> CyberCheck24x7 Score</span>
           </div>
         </Card>

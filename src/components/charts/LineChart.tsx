@@ -19,13 +19,13 @@ const catchScoreData: ScorePoint[] = [
 
 export default function CyberCatchScoreChart() {
   return (
-    <div className="rounded-2xl border border-gray-light bg-white-pure p-4 shadow-[0_2px_12px_rgba(15,41,64,0.06)]">
+    <div className="rounded-xl sm:rounded-2xl border border-gray-light bg-white-pure p-3 shadow-[0_2px_12px_rgba(15,41,64,0.06)] min-w-0">
       {/* Header */}
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-[13px] font-bold text-navy">CyberCatch Score</h3>
-        <div className="flex items-center gap-2 text-[11px]">
+      <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+        <h3 className="text-xs font-bold text-navy">CyberCatch Score</h3>
+        <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
           <span className="text-brand">All</span>
-          <span className="px-2.5 py-1 rounded-full bg-brand text-white font-semibold">D</span>
+          <span className="px-2 py-0.5 rounded-full bg-brand text-white font-semibold">D</span>
           <span className="text-brand">W</span>
           <span className="text-brand">M</span>
           <span className="text-brand">Custom</span>
@@ -33,7 +33,7 @@ export default function CyberCatchScoreChart() {
       </div>
 
       {/* Chart */}
-      <div className="relative h-[180px]">
+      <div className="relative h-[160px] sm:h-[180px]">
         <ResponsiveContainer width="100%" height="100%">
           <ReChart data={catchScoreData}>
             <XAxis dataKey="name" stroke="#AAAAAA" fontSize={11} tickLine={false} axisLine={false} />
@@ -47,7 +47,7 @@ export default function CyberCatchScoreChart() {
       </div>
 
       {/* Legend */}
-      <div className="flex gap-4 justify-center text-[11px] text-navy/60 mt-2">
+      <div className="flex flex-wrap gap-2 justify-center text-[11px] text-navy/60 mt-2">
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-brand" /> Previous Test Run</span>
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-sky" /> Average Client</span>
       </div>
