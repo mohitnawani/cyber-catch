@@ -1,0 +1,364 @@
+import { MoreHorizontal, X } from "lucide-react";
+import { useState } from "react";
+
+type Template = {
+  id: number;
+  name: string;
+  description: string;
+  message: string;
+  linkTitle: string;
+  linkHref: string;
+};
+
+type TemplateForm = Omit<Template, "id">;
+
+const initialTemplates: Template[] = [
+  {
+    id: 1,
+    name: "Template 1",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 2,
+    name: "Phishing Attack 1",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 3,
+    name: "Template Phishing 9/5/2021",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 4,
+    name: "SASB-20",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 5,
+    name: "Custom-500TCB",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 6,
+    name: "TCFP-21",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 7,
+    name: "TCFP-20",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 8,
+    name: "SASB-21",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 9,
+    name: "Custom-finance",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+  {
+    id: 10,
+    name: "Custom-software",
+    description: "",
+    message: "",
+    linkTitle: "",
+    linkHref: "",
+  },
+];
+
+const emptyForm: TemplateForm = {
+  name: "",
+  description: "",
+  message: "",
+  linkTitle: "",
+  linkHref: "",
+};
+
+const buttonClass =
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30 w-[180px] h-[40px]";
+
+export default function Templates() {
+  // Stores the current template rows shown in the list.
+  const [templates, setTemplates] = useState(initialTemplates);
+  // Stores the text used to filter templates by name.
+  const [query, setQuery] = useState("");
+  // Tracks which template's three-dot actions menu is open.
+  const [openMenu, setOpenMenu] = useState<number | null>(null);
+  // Stores the controlled values for the create or edit form.
+  const [form, setForm] = useState<TemplateForm>(emptyForm);
+  // Identifies the template being edited; null means create mode.
+  const [editingId, setEditingId] = useState<number | null>(null);
+  // Controls whether the create or edit modal is visible.
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const shownTemplates = templates.filter((template) =>
+    template.name.toLowerCase().includes(query.toLowerCase()),
+  );
+
+  const updateForm = (key: keyof TemplateForm, value: string) =>
+    setForm((current) => ({ ...current, [key]: value }));
+
+  const openCreate = () => {
+    setEditingId(null);
+    setForm({ ...emptyForm });
+    setIsModalOpen(true);
+  };
+
+  const openEdit = (template: Template) => {
+    const { id: _, ...templateForm } = template;
+    setEditingId(template.id);
+    setForm(templateForm);
+    setOpenMenu(null);
+    setIsModalOpen(true);
+  };
+
+  const saveTemplate = () => {
+    const nextTemplate = {
+      ...form,
+      name: form.name.trim() || "Untitled template",
+    };
+    setTemplates((current) =>
+      editingId === null
+        ? [...current, { id: Date.now(), ...nextTemplate }]
+        : current.map((template) =>
+            template.id === editingId
+              ? { id: editingId, ...nextTemplate }
+              : template,
+          ),
+    );
+    setEditingId(null);
+    setForm(emptyForm);
+    setIsModalOpen(false);
+  };
+
+  return (
+<section className="w-full max-w-[920px] pt-6 overflow-x-hidden">
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h2 className="text-lg sm:text-[20px] font-bold tracking-[-0.03em] text-black">
+            Email Templates
+          </h2>
+          <p className="mt-0.5 text-xs leading-4 text-navy/75">
+            In this section you can manage your email templates.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          <button
+            className={`${buttonClass} border border-brand bg-white text-brand`}
+          >
+            View Template Library
+          </button>
+          <button
+            onClick={openCreate}
+            className={`${buttonClass} bg-brand text-white`}
+          >
+            Create Template
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-1 flex h-6 w-full sm:w-[165px] items-center rounded-full bg-[#eff1ff] px-2 text-[10px] text-[#8b8daf]">
+        <span className="mr-2">⌕</span>
+        <input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search templates"
+          className="w-full bg-transparent outline-none placeholder:text-[#8b8daf]"
+        />
+      </div>
+
+      <div className="mt-1 space-y-1">
+        {shownTemplates.map((template) => (
+          <div
+            key={template.id}
+            className="relative flex min-h-[32px] items-center justify-between gap-1.5 rounded-xl bg-white px-3 py-1.5 text-[10px] text-navy shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+          >
+            <span className="truncate font-bold">{template.name}</span>
+            <button
+              title={`Actions for ${template.name}`}
+              onClick={() =>
+                setOpenMenu((current) =>
+                  current === template.id ? null : template.id,
+                )
+              }
+              className="shrink-0 text-[#8586a3] hover:text-brand"
+            >
+              <MoreHorizontal size={15} />
+            </button>
+            {openMenu === template.id && (
+              <div className="absolute right-3 top-8 z-10 w-28 rounded-md border border-[#e6e7f0] bg-white p-1 text-[10px] shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
+                <button
+                  onClick={() => openEdit(template)}
+                  className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
+                >
+                  Change
+                </button>
+                <button
+                  onClick={() => {
+                    setTemplates((current) =>
+                      current.filter((item) => item.id !== template.id),
+                    );
+                    setOpenMenu(null);
+                  }}
+                  className="block w-full rounded px-2 py-1.5 text-left text-[#d04e4e] hover:bg-[#fff2f2]"
+                >
+                  Archive
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {!shownTemplates.length && (
+        <p className="mt-1 rounded-xl bg-white p-3 text-center text-xs text-navy/55">
+          No templates found.
+        </p>
+      )}
+      {isModalOpen && (
+        <TemplateModal
+          editing={editingId !== null}
+          form={form}
+          onChange={updateForm}
+          onClose={() => {
+            setEditingId(null);
+            setForm(emptyForm);
+            setIsModalOpen(false);
+          }}
+          onSave={saveTemplate}
+        />
+      )}
+    </section>
+  );
+}
+
+function TemplateModal({
+  editing,
+  form,
+  onChange,
+  onClose,
+  onSave,
+}: {
+  editing: boolean;
+  form: TemplateForm;
+  onChange: (key: keyof TemplateForm, value: string) => void;
+  onClose: () => void;
+  onSave: () => void;
+}) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-3">
+      <div className="relative w-full max-w-[360px] rounded-xl bg-white p-3 sm:p-4 shadow-[0_18px_45px_rgba(15,41,64,0.2)]">
+        <button
+          onClick={onClose}
+          className="absolute right-3 top-3 text-[#9899bc] hover:text-navy"
+          aria-label="Close"
+        >
+          <X size={14} />
+        </button>
+        <h2 className="text-xl font-bold text-black">
+          {editing ? "Change email template" : "Create email template"}
+        </h2>
+        <p className="mt-1 text-[10px] text-navy/70">
+          You can create an email template from scratch here.
+        </p>
+        <div className="mt-2 space-y-1.5">
+          <Field
+            label="Name"
+            value={form.name}
+            onChange={(value) => onChange("name", value)}
+          />
+          <Field
+            label="Description"
+            value={form.description}
+            onChange={(value) => onChange("description", value)}
+          />
+          <label className="block text-[10px] font-bold text-navy">
+            Message
+            <textarea
+              value={form.message}
+              onChange={(event) => onChange("message", event.target.value)}
+              className="mt-0.5 block h-14 w-full resize-none rounded border border-[#e5e6ef] p-1.5 text-[10px] font-normal outline-none focus:border-brand"
+            />
+          </label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            <Field
+              label="Link Title"
+              value={form.linkTitle}
+              onChange={(value) => onChange("linkTitle", value)}
+            />
+            <Field
+              label="Link HREF"
+              value={form.linkHref}
+              onChange={(value) => onChange("linkHref", value)}
+            />
+          </div>
+        </div>
+        <div className="mt-2 flex gap-1.5">
+          <button
+            onClick={onSave}
+            className={`${buttonClass} min-w-[90px] bg-brand text-white`}
+          >
+            Save
+          </button>
+          <button
+            onClick={onClose}
+            className="px-2 text-[10px] font-semibold text-[#8586a3]"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Field({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <label className="block text-[10px] font-bold text-navy">
+      {label}
+      <input
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder="Input"
+        className="mt-0.5 block h-6 w-full rounded border border-[#e5e6ef] px-1.5 text-[10px] font-normal outline-none focus:border-brand"
+      />
+    </label>
+  );
+}
