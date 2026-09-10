@@ -39,4 +39,4 @@ export const members: ImportedMember[] = [
 ];
 
 export const buttonClass =
-  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-xs font-bold leading-5 transition focus:outline-none focus:ring-2 focus:ring-brand/30";
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-xs font-bold leading-5 transition focus:outline-none focus:ring-2 focus:ring-brand/30 w-[180px] h-[40px]";

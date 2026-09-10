@@ -34,7 +34,7 @@ const emailTemplates = [
   "Custom-finance",
 ];
 const buttonClass =
-  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30 w-[180px] h-[40px]";
 
 export default function CreateCampaignPage() {
   const navigate = useNavigate();
@@ -61,13 +61,13 @@ export default function CreateCampaignPage() {
   const saveCampaign = () => navigate("/cyber-phisher/campaigns");
 
   return (
-<section className="w-full max-w-[920px] pb-4 pt-1 overflow-x-hidden">
-      <div className="flex items-start justify-between gap-2">
+    <section className="w-full max-w-[920px] pb-2 pt-1 overflow-x-hidden">
+      <div className="flex items-start justify-between gap-1.5">
         <div className="min-w-0">
           <h2 className="text-lg sm:text-[20px] font-bold tracking-[-0.03em] text-black">
             Create Campaign
           </h2>
-          <p className="mt-1 text-xs leading-4 text-navy/75">
+          <p className="mt-0.5 text-xs leading-4 text-navy/75">
             Please, fill these fields to create new campaign.
           </p>
         </div>
@@ -79,8 +79,8 @@ export default function CreateCampaignPage() {
           <X size={16} />
         </button>
       </div>
-      <div className="mt-3 w-full max-w-[620px] space-y-3">
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <div className="mt-1 w-full max-w-[620px] space-y-1.5">
+        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
           <Field
             label="Name"
             value={form.name}
@@ -93,10 +93,10 @@ export default function CreateCampaignPage() {
           />
         </div>
         <FormSection title="Please, choose one or more groups to associate as target groups for this campaign.">
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
             {form.groups.map((group, index) => (
               <div key={index}>
-                <div className="mb-1 flex items-center justify-between text-[10px] font-bold text-navy">
+                <div className="mb-0.5 flex items-center justify-between text-[10px] font-bold text-navy">
                   <span>Group {index + 1}</span>
                   {form.groups.length > 2 && (
                     <button
@@ -119,7 +119,7 @@ export default function CreateCampaignPage() {
           </div>
           <button
             onClick={addGroup}
-            className={`${buttonClass} mt-2 bg-brand text-white`}
+            className={`${buttonClass} mt-1 bg-brand text-white`}
           >
             <Plus size={12} className="mr-1" />
             Add Group
@@ -137,7 +137,7 @@ export default function CreateCampaignPage() {
           </label>
         </FormSection>
         <FormSection title="Please, set the dates for this campaign">
-          <div className="grid max-w-[300px] grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid max-w-[300px] grid-cols-1 sm:grid-cols-2 gap-1.5">
             <DateField
               label="Start Date"
               value={form.startDate}
@@ -161,7 +161,7 @@ export default function CreateCampaignPage() {
             />
           </label>
         </FormSection>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5">
           <button
             onClick={saveCampaign}
             className={`${buttonClass} bg-brand text-white`}
@@ -189,7 +189,7 @@ function FormSection({
 }) {
   return (
     <div>
-      <p className="mb-1.5 text-xs leading-4 text-navy/80">{title}</p>
+      <p className="mb-1 text-xs leading-4 text-navy/80">{title}</p>
       {children}
     </div>
   );
@@ -210,7 +210,7 @@ function Field({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder="Input"
-        className="mt-1 block h-8 w-full rounded border border-[#e5e6ef] px-2 text-[10px] font-normal outline-none focus:border-brand"
+        className="mt-0.5 block h-6 w-full rounded border border-[#e5e6ef] px-1.5 text-[10px] font-normal outline-none focus:border-brand"
       />
     </label>
   );
@@ -227,11 +227,11 @@ function SelectField({
   onChange: (value: string) => void;
 }) {
   return (
-    <div className="relative mt-1">
+    <div className="relative mt-0.5">
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-8 w-full appearance-none rounded border border-[#e5e6ef] bg-white px-2 pr-7 text-[10px] font-normal text-navy outline-none focus:border-brand"
+        className="h-6 w-full appearance-none rounded border border-[#e5e6ef] bg-white px-1.5 pr-6 text-[10px] font-normal text-navy outline-none focus:border-brand"
       >
         <option value="">{placeholder}</option>
         {options.map((option) => (
@@ -241,8 +241,8 @@ function SelectField({
         ))}
       </select>
       <ChevronDown
-        size={13}
-        className="pointer-events-none absolute right-2 top-2 text-[#9899bc]"
+        size={12}
+        className="pointer-events-none absolute right-1.5 top-1.5 text-[#9899bc]"
       />
     </div>
   );
@@ -259,16 +259,16 @@ function DateField({
   return (
     <label className="block text-[10px] font-bold text-navy">
       {label}
-      <div className="relative mt-1">
+      <div className="relative mt-0.5">
         <input
           type="date"
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="h-8 w-full rounded border border-[#e5e6ef] bg-white px-2 pr-7 text-[10px] font-normal text-navy outline-none focus:border-brand"
+          className="h-6 w-full rounded border border-[#e5e6ef] bg-white px-1.5 pr-6 text-[10px] font-normal text-navy outline-none focus:border-brand"
         />
         <CalendarDays
-          size={13}
-          className="pointer-events-none absolute right-2 top-2 text-[#9899bc]"
+          size={12}
+          className="pointer-events-none absolute right-1.5 top-1.5 text-[#9899bc]"
         />
       </div>
     </label>

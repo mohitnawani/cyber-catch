@@ -47,7 +47,7 @@ export default function Cyberxraybar({ onClose }: CyberxraybarProps) {
               }`
             }
           >
-            <Icon size={16} strokeWidth={1.8} className="h-4 w-4 shrink-0 object-contain" />
+            <Icon size={12} strokeWidth={1.4}  className="h-4 w-4 shrink-0 object-contain" />
             {label}
           </NavLink>
         ))}

@@ -102,21 +102,21 @@ export default function OrganizationPage() {
       </div>
       {organizations.length ? (
         <>
-          <div className="mt-4 overflow-x-auto">
+          <div className="mt-2 overflow-x-auto">
             <div className="min-w-[560px]">
-              <div className="grid grid-cols-[1.4fr_1.4fr_0.4fr] px-4 pb-2 text-[10px] font-semibold text-[#8586a3]">
+              <div className="grid grid-cols-[1.4fr_1.4fr_0.4fr] px-3 pb-1 text-[10px] font-semibold text-[#8586a3]">
                 <span>Name</span>
                 <span>Industry</span>
                 <span className="text-right">Manage</span>
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 {shownOrganizations.map((organization) => {
                   const selected = selectedId === organization.id;
                   return (
                     <div
                       key={organization.id}
                       onClick={() => setSelectedId(organization.id)}
-                      className={`relative grid cursor-pointer grid-cols-[1.4fr_1.4fr_0.4fr] items-center rounded-xl bg-white px-4 py-2.5 text-xs text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)] transition ${selected ? "ring-2 ring-brand" : "hover:ring-1 hover:ring-brand/40"
+                      className={`relative grid cursor-pointer grid-cols-[1.4fr_1.4fr_0.4fr] items-center rounded-xl bg-white px-3 py-1.5 text-xs text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)] transition ${selected ? "ring-2 ring-brand" : "hover:ring-1 hover:ring-brand/40"
                         }`}
                     >
                       <span className="truncate">{organization.name}</span>
@@ -136,10 +136,10 @@ export default function OrganizationPage() {
                         </button>
                       </span>
                       {openMenu === organization.id && (
-                        <div className="absolute right-3 top-9 z-10 w-40 rounded-md border border-[#e6e7f0] bg-white p-1 text-xs shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
+                        <div className="absolute right-3 top-8 z-10 w-40 rounded-md border border-[#e6e7f0] bg-white p-1 text-xs shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
                           <button
                             onClick={() => openEditModal(organization)}
-                            className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
+                            className="block w-full rounded px-2 py-1 text-left hover:bg-[#f5f6ff]"
                           >
                             Change Details
                           </button>
@@ -148,13 +148,13 @@ export default function OrganizationPage() {
                               setOpenMenu(null);
                               navigate(`/organization/${organization.id}`);
                             }}
-                            className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
+                            className="block w-full rounded px-2 py-1 text-left hover:bg-[#f5f6ff]"
                           >
                             Manage Organization
                           </button>
                           <button
                             onClick={() => setOpenMenu(null)}
-                            className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
+                            className="block w-full rounded px-2 py-1 text-left hover:bg-[#f5f6ff]"
                           >
                             Add Child Organization
                           </button>
@@ -166,7 +166,7 @@ export default function OrganizationPage() {
               </div>
             </div>
           </div>
-          <div className="mt-3 flex flex-wrap items-center justify-end gap-1 text-[10px] text-[#8586a3]">
+          <div className="mt-2 flex flex-wrap items-center justify-end gap-1 text-[10px] text-[#8586a3]">
             <button onClick={() => setPage(1)} className="hover:text-brand">First</button>
             <span className="mx-1">|</span>
             {[1, 2, 3, 4].map((p) => (
@@ -183,12 +183,12 @@ export default function OrganizationPage() {
           </div>
         </>
       ) : (
-        <div className="mt-4 flex flex-col gap-2 rounded-xl border border-gray-light bg-white px-4 py-3 text-xs shadow-[0_4px_14px_rgba(15,41,64,0.05)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-2 flex flex-col gap-2 rounded-xl border border-gray-light bg-white px-3 py-2 text-xs shadow-[0_4px_14px_rgba(15,41,64,0.05)] sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-[13px] font-bold text-black">
               There are no organizations yet
             </p>
-            <p className="mt-1 text-[10px] text-navy/60">
+            <p className="mt-0.5 text-[10px] text-navy/60">
               You can create new organization here.
             </p>
           </div>

@@ -1,5 +1,5 @@
 import { ChevronDown, MoreHorizontal, Plus, UserPlus, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const products = ["Cyber Check 24/7", "Cyber X-Ray", "Cyber Phisher"];
 const roles = ["Admin", "Manager", "Member"];
@@ -22,7 +22,6 @@ type MemberForm = {
   confirmPassword: string;
   assignments: Record<string, string>;
 };
-type InviteRow = { email: string; role: string };
 const initialMembers: Member[] = Array.from({ length: 8 }, (_, index) => ({
   id: index + 1,
   name: "Edwards Ralph",
@@ -39,12 +38,6 @@ const emptyForm: MemberForm = {
   confirmPassword: "",
   assignments: {},
 };
-const defaultInviteRows: InviteRow[] = [
-  { email: "admin@example.com", role: "Admin" },
-  { email: "", role: "" },
-  { email: "", role: "" },
-];
-
 type Modal =
   | "chooser"
   | "add"
@@ -53,14 +46,21 @@ type Modal =
   | "organizations"
   | null;
 
-export default function OrganizationMembersPage() {
+export default function OrganizationMembersPage({
+  openSignal = 0,
+  onOpened,
+}: {
+  openSignal?: number;
+  onOpened?: () => void;
+}) {
   const [members, setMembers] = useState(initialMembers);
   const [modal, setModal] = useState<Modal>(null);
   const [form, setForm] = useState<MemberForm>(emptyForm);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
   const [inviteSent, setInviteSent] = useState(false);
-  const [inviteRows, setInviteRows] = useState(defaultInviteRows);
-  const [inviteError, setInviteError] = useState(false);
+  const [inviteStatus, setInviteStatus] = useState<"idle" | "success" | "error">(
+    "idle",
+  );
   const [selectedOrganizations, setSelectedOrganizations] = useState<number[]>(
     [],
   );
@@ -75,11 +75,17 @@ export default function OrganizationMembersPage() {
   const openChooser = () => {
     setForm(emptyForm);
     setInviteSent(false);
-    setInviteError(false);
-    setInviteRows(defaultInviteRows);
+    setInviteStatus("idle");
     setModal("chooser");
   };
-  const saveMember = (invite: boolean) => {
+  // Opens the chooser when the parent "Add Members" button is clicked.
+  useEffect(() => {
+    if (openSignal > 0) {
+      openChooser();
+      onOpened?.();
+    }
+  }, [openSignal]);
+  const addMemberFromForm = () => {
     const name = `${form.firstName} ${form.lastName}`.trim() || "New Member";
     setMembers((current) => [
       ...current,
@@ -92,8 +98,30 @@ export default function OrganizationMembersPage() {
         dateAdded: "8/7/2021",
       },
     ]);
+  };
+  const saveMember = (invite: boolean) => {
+    addMemberFromForm();
     if (invite) setInviteSent(true);
     else setModal(null);
+  };
+  // Validates the Invite Member form (Image 4). "Save & Add More" keeps the
+  // modal open and shows the success message; "Save & Close" closes it.
+  const submitInvite = (closeAfter: boolean) => {
+    const valid =
+      form.firstName.trim() !== "" &&
+      form.lastName.trim() !== "" &&
+      form.email.trim().includes("@");
+    if (!valid) {
+      setInviteStatus("error");
+      return;
+    }
+    addMemberFromForm();
+    if (closeAfter) {
+      setModal(null);
+    } else {
+      setInviteStatus("success");
+      setForm((current) => ({ ...emptyForm, assignments: current.assignments }));
+    }
   };
   const openAssignments = () => {
     setOpenMenu(null);
@@ -111,26 +139,6 @@ export default function OrganizationMembersPage() {
         ? current.filter((item) => item !== id)
         : [...current, id],
     );
-  const updateInviteRow = (
-    index: number,
-    key: keyof InviteRow,
-    value: string,
-  ) =>
-    setInviteRows((current) =>
-      current.map((row, rowIndex) =>
-        rowIndex === index ? { ...row, [key]: value } : row,
-      ),
-    );
-  const addInviteRow = () =>
-    setInviteRows((current) => [...current, { email: "", role: "" }]);
-  const sendInvitations = () => {
-    const hasInvalidEmail = inviteRows.some(
-      (row) => row.email.trim() && !row.email.includes("@"),
-    );
-    setInviteError(hasInvalidEmail);
-    setInviteSent(!hasInvalidEmail);
-  };
-
   return (
     <section className="mt-3">
       <div className="mt-2 overflow-x-auto">
@@ -222,18 +230,18 @@ export default function OrganizationMembersPage() {
           type={modal}
           form={form}
           inviteSent={inviteSent}
-          inviteRows={inviteRows}
-          inviteError={inviteError}
+          inviteStatus={inviteStatus}
           selectedOrganizations={selectedOrganizations}
           onChange={updateForm}
           onAssignment={updateAssignment}
-          onInviteRowChange={updateInviteRow}
-          onAddInviteRow={addInviteRow}
-          onSendInvitations={sendInvitations}
+          onSubmitInvite={submitInvite}
           onToggleOrganization={toggleOrganization}
           onClose={() => setModal(null)}
           onOpenAdd={() => setModal("add")}
-          onOpenInvite={() => setModal("invite")}
+          onOpenInvite={() => {
+            setInviteStatus("idle");
+            setModal("invite");
+          }}
           onOpenOrganizations={() => setModal("organizations")}
           onSave={() => saveMember(false)}
           onInvite={() => saveMember(true)}
@@ -247,14 +255,11 @@ function MemberModal({
   type,
   form,
   inviteSent,
-  inviteRows,
-  inviteError,
+  inviteStatus,
   selectedOrganizations,
   onChange,
   onAssignment,
-  onInviteRowChange,
-  onAddInviteRow,
-  onSendInvitations,
+  onSubmitInvite,
   onToggleOrganization,
   onClose,
   onOpenAdd,
@@ -266,18 +271,11 @@ function MemberModal({
   type: Exclude<Modal, null>;
   form: MemberForm;
   inviteSent: boolean;
-  inviteRows: InviteRow[];
-  inviteError: boolean;
+  inviteStatus: "idle" | "success" | "error";
   selectedOrganizations: number[];
   onChange: <K extends keyof MemberForm>(key: K, value: MemberForm[K]) => void;
   onAssignment: (product: string, role: string) => void;
-  onInviteRowChange: (
-    index: number,
-    key: keyof InviteRow,
-    value: string,
-  ) => void;
-  onAddInviteRow: () => void;
-  onSendInvitations: () => void;
+  onSubmitInvite: (closeAfter: boolean) => void;
   onToggleOrganization: (id: number) => void;
   onClose: () => void;
   onOpenAdd: () => void;
@@ -305,7 +303,11 @@ function MemberModal({
     );
   if (type === "chooser")
     return (
-      <BaseModal title="Add New Members" onClose={onClose}>
+      <BaseModal
+        title="Add New Members"
+        onClose={onClose}
+        className="min-h-[440px]"
+      >
         <p className="mt-2 text-xs leading-5 text-navy/75">
           You can send email invites to members, or add them directly using the
           options below.
@@ -329,12 +331,12 @@ function MemberModal({
   if (type === "invite")
     return (
       <InviteMembersModal
-        rows={inviteRows}
-        sent={inviteSent}
-        error={inviteError}
-        onRowChange={onInviteRowChange}
-        onAddRow={onAddInviteRow}
-        onSend={onSendInvitations}
+        form={form}
+        status={inviteStatus}
+        onChange={onChange}
+        onAssignment={onAssignment}
+        onSaveMore={() => onSubmitInvite(false)}
+        onSaveClose={() => onSubmitInvite(true)}
         onClose={onClose}
       />
     );
@@ -382,43 +384,10 @@ function MemberModal({
         <br />
         Once you select a product, select a role.
       </p>
-      <div className="mt-1.5 space-y-1">
-        <div className="grid grid-cols-[1fr_110px] text-[10px] font-bold text-[#8586a3]">
-          <span>Product</span>
-          <span>Role</span>
-        </div>
-        {products.map((product) => (
-          <div
-            key={product}
-            className="grid grid-cols-[1fr_110px] items-center gap-2 text-[10px]"
-          >
-            <label className="flex items-center gap-1.5">
-              <input
-                type="checkbox"
-                defaultChecked
-                className="h-3.5 w-3.5 rounded accent-brand"
-              />
-              {product}
-            </label>
-            <div className="relative">
-              <select
-                value={form.assignments[product] || ""}
-                onChange={(event) => onAssignment(product, event.target.value)}
-                className="h-6 w-full appearance-none rounded border border-[#e5e6ef] bg-white px-1.5 pr-6 text-[10px] outline-none"
-              >
-                <option value="">Role</option>
-                {roles.map((role) => (
-                  <option key={role}>{role}</option>
-                ))}
-              </select>
-              <ChevronDown
-                size={12}
-                className="pointer-events-none absolute right-1.5 top-1.5 text-[#9899bc]"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      <ProductAssignments
+        assignments={form.assignments}
+        onAssignment={onAssignment}
+      />
       {inviteSent && (
         <p className="mt-2 text-center text-[10px] font-semibold text-[#12a35d]">
           Success! We have invited your member via email!
@@ -517,91 +486,134 @@ function AssignmentsModal({
   );
 }
 
+function ProductAssignments({
+  assignments,
+  onAssignment,
+}: {
+  assignments: Record<string, string>;
+  onAssignment: (product: string, role: string) => void;
+}) {
+  return (
+    <div className="mt-1.5 space-y-1">
+      <div className="grid grid-cols-[1fr_110px] text-[10px] font-bold text-[#8586a3]">
+        <span>Product</span>
+        <span>Role</span>
+      </div>
+      {products.map((product) => (
+        <div
+          key={product}
+          className="grid grid-cols-[1fr_110px] items-center gap-2 text-[10px]"
+        >
+          <label className="flex items-center gap-1.5">
+            <input
+              type="checkbox"
+              defaultChecked
+              className="h-3.5 w-3.5 rounded accent-brand"
+            />
+            {product}
+          </label>
+          <div className="relative">
+            <select
+              value={assignments[product] || ""}
+              onChange={(event) => onAssignment(product, event.target.value)}
+              className="h-6 w-full appearance-none rounded border border-[#e5e6ef] bg-white px-1.5 pr-6 text-[10px] outline-none"
+            >
+              <option value="">Role</option>
+              {roles.map((role) => (
+                <option key={role}>{role}</option>
+              ))}
+            </select>
+            <ChevronDown
+              size={12}
+              className="pointer-events-none absolute right-1.5 top-1.5 text-[#9899bc]"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function InviteMembersModal({
-  rows,
-  sent,
-  error,
-  onRowChange,
-  onAddRow,
-  onSend,
+  form,
+  status,
+  onChange,
+  onAssignment,
+  onSaveMore,
+  onSaveClose,
   onClose,
 }: {
-  rows: InviteRow[];
-  sent: boolean;
-  error: boolean;
-  onRowChange: (index: number, key: keyof InviteRow, value: string) => void;
-  onAddRow: () => void;
-  onSend: () => void;
+  form: MemberForm;
+  status: "idle" | "success" | "error";
+  onChange: <K extends keyof MemberForm>(key: K, value: MemberForm[K]) => void;
+  onAssignment: (product: string, role: string) => void;
+  onSaveMore: () => void;
+  onSaveClose: () => void;
   onClose: () => void;
 }) {
   return (
     <BaseModal title="Invite Member" onClose={onClose}>
-      <p className="mt-1.5 text-center text-[10px] text-navy/70">
-        Get your project up and running faster by directly inviting your team
-        members to your project.
-      </p>
-      <div className="mt-2 space-y-1.5">
-        <div className="grid grid-cols-[1fr_110px] gap-2 px-1 text-[10px] font-bold text-[#8586a3]">
-          <span>Email address</span>
-          <span>Role</span>
-        </div>
-        {rows.map((row, index) => (
-          <div key={index} className="grid grid-cols-[1fr_110px] gap-2">
-            <input
-              value={row.email}
-              onChange={(event) =>
-                onRowChange(index, "email", event.target.value)
-              }
-              placeholder="name@example.com"
-              className="h-6 rounded border border-[#e5e6ef] px-1.5 text-[10px] outline-none focus:border-brand"
-            />
-            <div className="relative">
-              <select
-                value={row.role}
-                onChange={(event) =>
-                  onRowChange(index, "role", event.target.value)
-                }
-                className="h-6 w-full appearance-none rounded border border-[#e5e6ef] bg-white px-1.5 pr-6 text-[10px] outline-none"
-              >
-                <option value="">Select role</option>
-                {roles.map((role) => (
-                  <option key={role}>{role}</option>
-                ))}
-              </select>
-              <ChevronDown
-                size={12}
-                className="pointer-events-none absolute right-1.5 top-1.5 text-[#9899bc]"
-              />
-            </div>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+        <Field
+          label="First Name"
+          value={form.firstName}
+          onChange={(value) => onChange("firstName", value)}
+          required
+        />
+        <Field
+          label="Last Name"
+          value={form.lastName}
+          onChange={(value) => onChange("lastName", value)}
+          required
+        />
       </div>
-      <button
-        onClick={onAddRow}
-        className="mt-1.5 w-full rounded border border-[#e5e6ef] py-1 text-[10px] text-[#8586a3]"
-      >
-        + Add more
-      </button>
-      {sent && (
+      <Field
+        label="Email Address"
+        value={form.email}
+        onChange={(value) => onChange("email", value)}
+        required
+      />
+      <p className="mt-2 text-[10px] font-bold text-navy">
+        Products Assignments
+      </p>
+      <p className="mt-0.5 text-[10px] leading-4 text-navy/70">
+        Select the products that you&apos;d like this member to have access to.
+        <br />
+        Once you select a product, select a role.
+      </p>
+      <ProductAssignments
+        assignments={form.assignments}
+        onAssignment={onAssignment}
+      />
+      {status === "success" && (
         <p className="mt-2 text-center text-[10px] font-semibold text-[#12a35d]">
-          Success! We have invited your team members via email!
+          Success! We have invited your member via email!
         </p>
       )}
-      {error && (
+      {status === "error" && (
         <p className="mt-2 text-center text-[10px] font-semibold text-[#d04e4e]">
-          Sorry, we couldn&apos;t invite your team members. Please contact us at
-          support@example.com.
+          Sorry! We can&apos;t invite your member. Please contact us at
+          cybercatch@support.com
         </p>
       )}
-      <div className="mt-2 flex flex-col items-center gap-2">
+      <div className="mt-2 flex flex-wrap gap-2">
         <button
-          onClick={onSend}
-          className={`${buttonClass} min-w-[160px] bg-brand text-white`}
+          onClick={onSaveMore}
+          className={`${buttonClass} bg-brand text-white`}
         >
-          Send invitations
+          Save & Add More
         </button>
-        <button onClick={onClose} className="text-[10px] text-[#8586a3]">
-          Invite later
+        <button
+          onClick={onSaveClose}
+          className={`${buttonClass} border border-brand bg-white text-brand`}
+        >
+          Save & Close
+        </button>
+        <button
+          onClick={onClose}
+          className="px-2 text-[10px] font-semibold text-[#8586a3]"
+        >
+          Cancel
         </button>
       </div>
     </BaseModal>
@@ -658,14 +670,18 @@ function BaseModal({
   title,
   children,
   onClose,
+  className = "min-h-[220px]",
 }: {
   title: string;
   children: React.ReactNode;
   onClose: () => void;
+  className?: string;
 }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4">
-      <div className="relative flex min-h-[220px] w-full max-w-[440px] flex-col rounded-xl bg-white p-3 shadow-[0_18px_45px_rgba(15,41,64,0.2)]">
+      <div
+        className={`relative flex w-full max-w-[440px] flex-col rounded-xl bg-white p-3 shadow-[0_18px_45px_rgba(15,41,64,0.2)] max-h-[90vh] overflow-y-auto ${className}`}
+      >
         <button
           onClick={onClose}
           aria-label="Close"

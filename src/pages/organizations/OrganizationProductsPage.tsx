@@ -36,6 +36,13 @@ export default function OrganizationProductsPage() {
   const [children, setChildren] = useState<string[]>(["ABC Inc. - San Diego"]);
   // Controls whether the add-child flow is visible.
   const [isChildModalOpen, setIsChildModalOpen] = useState(false);
+  // Increments each time "Add Members" is clicked; consumed by the members
+  // tab to open the Add New Members chooser modal.
+  const [membersSignal, setMembersSignal] = useState(0);
+  const openMembersChooser = () => {
+    setActiveTab("members");
+    setMembersSignal((signal) => signal + 1);
+  };
 
   const confirmToggle = () => {
     if (!pendingProduct) return;
@@ -125,10 +132,11 @@ export default function OrganizationProductsPage() {
               Add Child Organization
             </button>
           )}
-          {(activeTab === "general" ||
-            activeTab === "subsidiaries" ||
-            activeTab === "members") && (
-            <button className={`${buttonClass} bg-brand text-white`}>
+          {(activeTab === "general" || activeTab === "subsidiaries") && (
+            <button
+              onClick={openMembersChooser}
+              className={`${buttonClass} bg-brand text-white`}
+            >
               Add Members
             </button>
           )}
@@ -139,7 +147,11 @@ export default function OrganizationProductsPage() {
             </button>
           )}
           {activeTab === "members" && (
-            <button className={`${buttonClass} bg-brand text-white`}>
+            <button
+              onClick={openMembersChooser}
+              className={`${buttonClass} bg-brand text-white`}
+            >
+              <Plus size={12} className="mr-1" />
               Add Members
             </button>
           )}
@@ -206,7 +218,12 @@ export default function OrganizationProductsPage() {
           ))}
         </div>
       )}
-      {activeTab === "members" && <OrganizationMembersPage />}
+      {activeTab === "members" && (
+        <OrganizationMembersPage
+          openSignal={membersSignal}
+          onOpened={() => setMembersSignal(0)}
+        />
+      )}
       {activeTab === "subsidiaries" && (
         <OrganizationSubsidiariesPage
           children={children}

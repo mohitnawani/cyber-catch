@@ -66,8 +66,8 @@ export default function OrganizationGeneralPage({ onSave }: Props) {
       </div>
 
       <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-        <button onClick={() => setShowDeactivate(true)} className={`${buttonClass} bg-[#c81e1e] text-white`}>Deactivate</button>
-        <button onClick={() => onSave?.(form)} className={`${buttonClass} min-w-[160px] bg-brand text-white`}>Save</button>
+        <button onClick={() => setShowDeactivate(true)} className={`${buttonClass} w-[180px] h-[40px] bg-[#c81e1e] text-white`}>Deactivate</button>
+        <button onClick={() => onSave?.(form)} className={`${buttonClass} min-w-[160px] w-[180px] h-[40px] bg-brand text-white`}>Save</button>
       </div>
       {showDeactivate && <OrganizationActionModal action="deactivate" onClose={() => setShowDeactivate(false)} onConfirm={() => setShowDeactivate(false)} />}
     </div>

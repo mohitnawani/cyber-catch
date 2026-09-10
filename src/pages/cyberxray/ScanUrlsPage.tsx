@@ -25,22 +25,25 @@ export default function ScanUrlsPage() {
   const visibleUrls = urls.length ? [...urls, ...sampleUrls] : []
 
   return (
-    <section className="relative min-h-[520px] py-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div><h1 className="text-lg lg:text-2xl    font-bold text-navy">Setup Scan URLs</h1><p className="mt-2 text-xs text-black">These are URLs that our system will scan for vulnerabilities on a period basis.</p></div>
-        {urls.length > 0 && <Button onClick={openPanel} className="inline-flex items-center gap-1.5 text-xs"><Plus size={14} /> Add New URL</Button>}
+    <section className="relative w-full min-h-[480px] py-4 overflow-x-hidden">
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-[28px] font-bold text-black">Setup Scan URLs</h1>
+          <p className="mt-1 text-xs leading-4 text-black">These are URLs that our system will scan for vulnerabilities on a period basis.</p>
+        </div>
+        {urls.length > 0 && <Button onClick={openPanel} className="inline-flex items-center gap-1"><Plus size={13} /> Add New URL</Button>}
       </div>
 
       {urls.length === 0 ? (
-        <div className="mt-4 rounded-2xl bg-white p-4 sm:p-5 text-center shadow-[0_8px_30px_rgba(15,41,64,0.08)]">
-          <h2 className="text-sm sm:text-base font-bold text-black">No Scan URLs Setup</h2>
+        <div className="mt-4 rounded-2xl bg-white p-8 sm:p-10 text-center shadow-[0_8px_30px_rgba(15,41,64,0.08)]">
+          <h2 className="text-xl sm:text-2xl font-bold text-black">No Scan URLs Setup</h2>
           <p className="mx-auto mt-2 max-w-[370px] text-xs leading-4 text-black">You have not set up any scan URLs. Click the “Add URLs” button below to start scanning.</p>
-          <h3 className="mt-3 text-[13px] font-bold text-black">To finalize URL Setup</h3>
-          <div className="mx-auto mt-2.5 max-w-[430px] space-y-1.5 text-left text-xs font-semibold text-black">
+          <h3 className="mt-6 text-[15px] font-bold text-black">To finalize URL Setup</h3>
+          <div className="mx-auto mt-3 max-w-[430px] space-y-1.5 text-left text-xs font-semibold text-black">
             <p className="flex items-center gap-2"><Check size={14} className="shrink-0 text-brand" />We will need confirmation that you own the domains we will scan.</p>
             <p className="flex items-center gap-2"><Check size={14} className="shrink-0 text-brand" />You will need access to your DNS Host to confirm your domain.</p>
           </div>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2"><Button onClick={openPanel} className="px-4">Add URLs</Button><Button variant="ghost" onClick={() => navigate('/cyber-xray/review')}>Skip for now, I’ll add later</Button></div>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2"><Button onClick={openPanel} className="px-4">Add URLs</Button><Button variant="ghost" onClick={() => navigate('/cyber-xray/review')}>Skip for now, I’ll add later</Button></div>
         </div>
       ) : (
         <div className="mt-4">

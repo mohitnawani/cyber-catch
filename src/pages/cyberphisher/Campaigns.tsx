@@ -19,7 +19,7 @@ const initialCampaigns: Campaign[] = Array.from({ length: 9 }, (_, index) => ({
 }));
 
 const buttonClass =
-  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30";
+  "inline-flex items-center justify-center rounded-md px-3 py-1.5 text-[10px] font-bold transition focus:outline-none focus:ring-2 focus:ring-brand/30 w-[180px] h-[40px]";
 
 export default function Campaigns() {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export default function Campaigns() {
           <h2 className="text-lg sm:text-[20px] font-bold tracking-[-0.03em] text-black">
             Phishing Campaigns
           </h2>
-          <p className="mt-1 text-xs leading-4 text-navy/75">
+          <p className="mt-0.5 text-xs leading-4 text-navy/75">
             In this section you can manage your phishing campaigns.
           </p>
         </div>
@@ -48,20 +48,20 @@ export default function Campaigns() {
         </button>
       </div>
 
-      <div className="mt-3 overflow-x-auto pb-1">
+      <div className="mt-1 overflow-x-auto pb-1">
         <div className="min-w-[560px]">
-          <div className="mx-auto grid grid-cols-[1.6fr_.8fr_1fr_1fr_.25fr] px-3 pb-1.5 text-[10px] font-semibold text-[#8586a3]">
+          <div className="mx-auto grid grid-cols-[1.6fr_.8fr_1fr_1fr_.25fr] px-3 pb-1 text-[10px] font-semibold text-[#8586a3]">
             <span>Name</span>
             <span>Status</span>
             <span>Start Date</span>
             <span>End Date</span>
             <span></span>
           </div>
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             {campaigns.map((campaign) => (
               <div
                 key={campaign.id}
-                className="relative grid min-h-[38px] grid-cols-[1.6fr_.8fr_1fr_1fr_.25fr] items-center rounded-xl bg-white px-3 py-2 text-[10px] text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+                className="relative grid min-h-[32px] grid-cols-[1.6fr_.8fr_1fr_1fr_.25fr] items-center rounded-xl bg-white px-3 py-1.5 text-[10px] text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
               >
                 <span className="truncate">{campaign.name}</span>
                 <span

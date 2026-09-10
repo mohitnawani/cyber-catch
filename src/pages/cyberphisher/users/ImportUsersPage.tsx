@@ -9,13 +9,13 @@ export default function ImportUsersPage({ onImport }: Props) {
       <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">
         Import Users
       </h2>
-      <p className="mt-1 max-w-md text-xs leading-5 text-navy/70">
+      <p className="mt-0.5 max-w-md text-xs leading-5 text-navy/70">
         You will be able to import users down your organization using the
         following option
       </p>
-      <div className="mt-6 flex items-center gap-4 rounded-xl bg-white px-5 py-4 shadow-[0_6px_20px_rgba(15,41,64,0.07)]">
-        <div className="flex h-9 w-9 items-center justify-center rounded-md bg-[#e6f6ed] text-[#0b9c53]">
-          <FileSpreadsheet size={20} />
+      <div className="mt-2 flex items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-[0_6px_20px_rgba(15,41,64,0.07)]">
+        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#e6f6ed] text-[#0b9c53]">
+          <FileSpreadsheet size={16} />
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="text-sm font-bold text-black">Import Using Excel</h3>
