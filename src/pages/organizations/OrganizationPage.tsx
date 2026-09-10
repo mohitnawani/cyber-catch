@@ -84,7 +84,7 @@ export default function OrganizationPage() {
   };
 
   return (
-    <section className="max-w-230 pt-1 mx-auto overflow-auto">
+    <section className="max-w-1366 lg:p-[50px] mx-auto overflow-auto">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-[27px] font-bold tracking-[-0.03em] text-black">
