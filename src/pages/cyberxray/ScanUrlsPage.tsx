@@ -27,7 +27,7 @@ export default function ScanUrlsPage() {
   return (
     <section className="relative min-h-[520px] py-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <div><h1 className="text-lg font-bold text-navy">Setup Scan URLs</h1><p className="mt-2 text-xs text-black">These are URLs that our system will scan for vulnerabilities on a period basis.</p></div>
+        <div><h1 className="text-lg lg:text-2xl    font-bold text-navy">Setup Scan URLs</h1><p className="mt-2 text-xs text-black">These are URLs that our system will scan for vulnerabilities on a period basis.</p></div>
         {urls.length > 0 && <Button onClick={openPanel} className="inline-flex items-center gap-1.5 text-xs"><Plus size={14} /> Add New URL</Button>}
       </div>
 

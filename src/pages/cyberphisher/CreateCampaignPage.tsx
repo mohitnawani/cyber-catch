@@ -61,7 +61,7 @@ export default function CreateCampaignPage() {
   const saveCampaign = () => navigate("/cyber-phisher/campaigns");
 
   return (
-    <section className="max-w-230 pb-8 pt-1">
+    <section className=" pb-8 pt-1">
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">

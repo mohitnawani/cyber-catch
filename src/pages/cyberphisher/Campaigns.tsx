@@ -29,7 +29,7 @@ export default function Campaigns() {
   const [openMenu, setOpenMenu] = useState<number | null>(null);
 
   return (
-    <section className="max-w-230 pt-1">
+    <section className=" pt-1">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">

@@ -35,31 +35,31 @@ export default {
         proxima: ['Proxima Nova', 'Montserrat', 'sans-serif'],
         ddin: ['D-DIN', 'DIN Alternate', 'Montserrat', 'sans-serif'],
       },
-      fontSize: {
-        xs: ["14px", { lineHeight: "20px" }],
-        sm: ["16px", { lineHeight: "24px" }],
-        base: ["18px", { lineHeight: "28px" }],
-        lg: ["20px", { lineHeight: "32px" }],
-        xl: ["22px", { lineHeight: "32px" }],
-        "2xl": ["26px", { lineHeight: "36px" }],
-        "3xl": ["32px", { lineHeight: "40px" }],
-        "4xl": ["38px", { lineHeight: "44px" }],
-      },
+        fontSize: {
+          xs: ["12px", { lineHeight: "18px" }],
+          sm: ["14px", { lineHeight: "22px" }],
+          base: ["16px", { lineHeight: "26px" }],
+          lg: ["18px", { lineHeight: "30px" }],
+          xl: ["20px", { lineHeight: "30px" }],
+          "2xl": ["24px", { lineHeight: "34px" }],
+          "3xl": ["30px", { lineHeight: "38px" }],
+          "4xl": ["36px", { lineHeight: "42px" }],
+        },
       spacing: {
-        1: '0.5rem',    // 8px
-        2: '1rem',      // 16px
-        3: '1.5rem',    // 24px
-        4: '2rem',      // 32px
-        5: '2.5rem',    // 40px
-        6: '3rem',      // 48px
-        7: '3.5rem',    // 56px
-        8: '4rem',      // 64px
-        9: '4.5rem',    // 72px
-        10: '5rem',     // 80px
-        11: '5.5rem',   // 88px
-        12: '6rem',     // 96px
-        14: '7rem',     // 112px
-        16: '8rem',     // 128px
+        1: '0.375rem',   // 6px
+        2: '0.875rem',   // 14px
+        3: '1.375rem',   // 22px
+        4: '1.875rem',   // 30px
+        5: '2.375rem',    // 38px
+        6: '2.875rem',    // 46px
+        7: '3.375rem',    // 54px
+        8: '3.875rem',    // 62px
+        9: '4.375rem',    // 70px
+        10: '4.875rem',   // 78px
+        11: '5.375rem',   // 86px
+        12: '5.875rem',   // 94px
+        14: '6.875rem',   // 110px
+        16: '7.875rem',   // 126px
       },
     },
   },

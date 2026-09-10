@@ -18,7 +18,7 @@ export default function GroupDetailsPage({
   onRemove,
 }: Props) {
   return (
-    <section className="max-w-[820px] pt-1">
+    <section className=" pt-1">
       <div className="flex items-center justify-between">
         <div>
           <button

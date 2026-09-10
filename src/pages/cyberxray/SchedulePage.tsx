@@ -26,10 +26,8 @@ export default function SchedulePage() {
 
   return (
     <section className="max-w-[620px] py-8">
-      <div className="flex h-11 w-11 items-center justify-center rounded-full text-[#604BFF]">
-        <CalendarDays size={29} strokeWidth={2} />
-      </div>
-      <h1 className="mt-5 text-lg font-bold tracking-tight text-navy">Select Your Test Schedule</h1>
+
+      <h1 className="mt-5 text-lg font-bold tracking-tight text-navy lg:text-2xl">Select Your Test Schedule</h1>
       <p className="mt-3 text-xs leading-6 text-black font-ddin">Test will run on the interval and date/time you select.<br />Don't worry you can always change this later.</p>
 
       <div className="mt-7 max-w-[380px] space-y-6">

@@ -26,11 +26,8 @@ export default function ScheduleSection() {
   const needsWeekday = interval === 'weekly' || interval === 'bi-weekly'
 
   return (
-    <section className="max-w-[680px] py-4 md:py-8 overflow-auto">
-      <div className="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full text-[#604BFF]">
-        <CalendarDays size={26} strokeWidth={2} className="md:w-7 md:h-7" />
-      </div>
-      <h1 className="mt-4 md:mt-5 text-base md:text-lg font-bold tracking-tight text-navy">
+    <section className="max-w-[680px] py-4 md:py-8 lg:pd-2 overflow-auto lg:px-4">
+      <h1 className="mt-4 md:mt-5 text-base md:text-lg font-bold tracking-tight text-navy lg:text-2xl">
         Select Your Test Schedule
       </h1>
       <p className="mt-2 md:mt-3 text-xs leading-6 text-black font-ddin">
