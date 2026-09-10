@@ -1,20 +1,19 @@
-import { Building2, MoreHorizontal, Plus, Search } from "lucide-react";
+import { Plus, SquarePen } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import AddOrganizationModal from "./AddOrganizationModal";
 import EditOrganizationModal from "./EditOrganizationModal";
-import {
+import OrganizationModal, {
   emptyOrganizationForm,
   type OrganizationForm,
 } from "./OrganizationModal";
 
 type Organization = { id: number; name: string; industry: string };
 const initialOrganizations: Organization[] = Array.from(
-  { length: 9 },
+  { length: 8 },
   (_, index) => ({
     id: index + 1,
-    name: "ABC Inc.",
-    industry: "Industry name",
+    name: "Some Organization",
+    industry: "Industry area name",
   }),
 );
 const buttonClass =
@@ -25,18 +24,18 @@ export default function OrganizationPage() {
   const [organizations, setOrganizations] = useState(initialOrganizations);
   // Controls whether the add organization modal is visible.
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // Filters organizations by name.
-  const [query, setQuery] = useState("");
+  // Tracks the selected (highlighted) row like Figma blue border.
+  const [selectedId, setSelectedId] = useState<number | null>(7);
   // Tracks which organization action menu is open.
   const [openMenu, setOpenMenu] = useState<number | null>(null);
+  // Current pagination page.
+  const [page, setPage] = useState(1);
   // Stores the controlled values entered in the edit form.
   const [form, setForm] = useState<OrganizationForm>(emptyOrganizationForm);
   // Tracks whether the edit organization flow is visible.
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const navigate = useNavigate();
-  const shownOrganizations = organizations.filter((organization) =>
-    organization.name.toLowerCase().includes(query.toLowerCase()),
-  );
+  const shownOrganizations = organizations;
   const updateForm = <K extends keyof OrganizationForm>(
     key: K,
     value: OrganizationForm[K],
@@ -98,102 +97,118 @@ export default function OrganizationPage() {
           onClick={() => setIsModalOpen(true)}
           className={`${buttonClass} shrink-0 bg-brand text-white`}
         >
-          <Plus size={12} className="mr-1" />
           Create an Organization
         </button>
       </div>
       {organizations.length ? (
         <>
-          <div className="mt-3 flex justify-start sm:justify-end">
-            <div className="flex h-7 w-full sm:w-[165px] items-center rounded-full bg-[#eff1ff] px-3 text-xs text-[#8b8daf]">
-              <Search size={12} className="mr-2 shrink-0" />
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Input"
-                className="w-full bg-transparent outline-none"
-              />
+          <div className="mt-4 overflow-x-auto">
+            <div className="min-w-[560px]">
+              <div className="grid grid-cols-[1.4fr_1.4fr_0.4fr] px-4 pb-2 text-[10px] font-semibold text-[#8586a3]">
+                <span>Name</span>
+                <span>Industry</span>
+                <span className="text-right">Manage</span>
+              </div>
+              <div className="space-y-1.5">
+                {shownOrganizations.map((organization) => {
+                  const selected = selectedId === organization.id;
+                  return (
+                    <div
+                      key={organization.id}
+                      onClick={() => setSelectedId(organization.id)}
+                      className={`relative grid cursor-pointer grid-cols-[1.4fr_1.4fr_0.4fr] items-center rounded-xl bg-white px-4 py-2.5 text-xs text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)] transition ${selected ? "ring-2 ring-brand" : "hover:ring-1 hover:ring-brand/40"
+                        }`}
+                    >
+                      <span className="truncate">{organization.name}</span>
+                      <span className="truncate">{organization.industry}</span>
+                      <span className="flex justify-end">
+                        <button
+                          title="Manage organization"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setOpenMenu((current) =>
+                              current === organization.id ? null : organization.id,
+                            );
+                          }}
+                          className="text-navy/60 hover:text-brand"
+                        >
+                          <SquarePen size={15} />
+                        </button>
+                      </span>
+                      {openMenu === organization.id && (
+                        <div className="absolute right-3 top-9 z-10 w-40 rounded-md border border-[#e6e7f0] bg-white p-1 text-xs shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
+                          <button
+                            onClick={() => openEditModal(organization)}
+                            className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
+                          >
+                            Change Details
+                          </button>
+                          <button
+                            onClick={() => {
+                              setOpenMenu(null);
+                              navigate(`/organization/${organization.id}`);
+                            }}
+                            className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
+                          >
+                            Manage Organization
+                          </button>
+                          <button
+                            onClick={() => setOpenMenu(null)}
+                            className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
+                          >
+                            Add Child Organization
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
-          <div className="mt-3 space-y-1.5">
-            {shownOrganizations.map((organization) => (
-              <div
-                key={organization.id}
-                className="relative flex min-h-[38px] items-center justify-between gap-2 rounded-xl bg-white px-3 py-2 text-xs text-navy/75 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+          <div className="mt-3 flex flex-wrap items-center justify-end gap-1 text-[10px] text-[#8586a3]">
+            <button onClick={() => setPage(1)} className="hover:text-brand">First</button>
+            <span className="mx-1">|</span>
+            {[1, 2, 3, 4].map((p) => (
+              <button
+                key={p}
+                onClick={() => setPage(p)}
+                className={page === p ? "font-bold text-brand" : "hover:text-brand"}
               >
-                <span className="truncate">{organization.name}</span>
-                <button
-                  title="Organization actions"
-                  onClick={() =>
-                    setOpenMenu((current) =>
-                      current === organization.id ? null : organization.id,
-                    )
-                  }
-                  className="shrink-0 text-[#8586a3] hover:text-brand"
-                >
-                  <MoreHorizontal size={15} />
-                </button>
-                {openMenu === organization.id && (
-                  <div className="absolute right-3 top-8 z-10 w-36 rounded-md border border-[#e6e7f0] bg-white p-1 text-xs shadow-[0_10px_24px_rgba(15,41,64,0.14)]">
-                    <button
-                      onClick={() => openEditModal(organization)}
-                      className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
-                    >
-                      Change Details
-                    </button>
-                    <button
-                      onClick={() => {
-                        setOpenMenu(null);
-                        navigate(`/organization/${organization.id}`);
-                      }}
-                      className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
-                    >
-                      Manage Organization
-                    </button>
-                    <button
-                      onClick={() => setOpenMenu(null)}
-                      className="block w-full rounded px-2 py-1.5 text-left hover:bg-[#f5f6ff]"
-                    >
-                      Add Child Organization
-                    </button>
-                  </div>
-                )}
-              </div>
+                {p}
+              </button>
             ))}
-          </div>
-          <div className="mt-3 flex flex-wrap justify-end gap-1 text-xs text-[#8586a3]">
-            First&nbsp; 1&nbsp; | 2&nbsp; | 3&nbsp; | 4&nbsp; | 5&nbsp; | Last
+            <span className="mx-1">|</span>
+            <button className="hover:text-brand">Last</button>
           </div>
         </>
       ) : (
-        <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-md border-2 border-brand bg-white px-3 py-2 text-xs shadow-[0_4px_14px_rgba(15,41,64,0.05)]">
+        <div className="mt-4 flex flex-col gap-2 rounded-xl border border-gray-light bg-white px-4 py-3 text-xs shadow-[0_4px_14px_rgba(15,41,64,0.05)] sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-bold text-navy">
+            <p className="text-[13px] font-bold text-black">
               There are no organizations yet
             </p>
-            <p className="mt-1 text-[9px] text-navy/60">
-              You can create a new organization to get started.
+            <p className="mt-1 text-[10px] text-navy/60">
+              You can create new organization here.
             </p>
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className={`${buttonClass} h-8 bg-brand px-3 text-white`}
+            className={`${buttonClass} shrink-0 bg-brand text-white`}
           >
             <Plus size={12} className="mr-1" />
             Create an Organization
           </button>
         </div>
       )}
-      {!organizations.length && (
-        <div className="mt-10 flex flex-col items-center text-navy/35">
-          <span className="flex h-9 w-9 items-center justify-center rounded-[12px] bg-[#5E81F41A] text-brand">
-            <Building2 size={20} strokeWidth={1.8} className="h-5 w-5 object-contain" />
-          </span>
-          <span className="mt-1.5 text-xs">No organizations</span>
-        </div>
-      )}
       {isModalOpen && (
-        <AddOrganizationModal onClose={closeModal} onSave={saveOrganization} />
+        <OrganizationModal
+          form={form}
+          onChange={updateForm}
+          onToggleProduct={toggleProduct}
+          onClose={closeModal}
+          onSave={() => saveOrganization(form.name.trim() || "Some Organization", form.industry.trim() || "Industry area name")}
+        />
       )}
       {isEditModalOpen && (
         <EditOrganizationModal

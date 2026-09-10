@@ -123,17 +123,11 @@ export default function ScheduleSection() {
           <Button
             type="button"
             onClick={() => navigate('/cyber-check/framework')}
-            className="w-[120px]"
+            className="w-[180px] h-[40px]"
           >
             Continue
           </Button>
-          <Button
-            variant="ghost"
-            type="button"
-            onClick={() => navigate('/cyber-check/framework')}
-          >
-            Skip to Framework
-          </Button>
+
         </div>
       </div>
     </section>

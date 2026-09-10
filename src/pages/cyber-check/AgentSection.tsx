@@ -38,7 +38,7 @@ export default function AgentSection() {
           <Button
             type="button"
             onClick={handleRegenerate}
-            className="px-3"
+            className="w-[180px] h-[40px]"
           >
             Regenerate
           </Button>
@@ -93,14 +93,14 @@ export default function AgentSection() {
       </div>
 
       {/* Download Action Cards */}
-      <div className="mt-4 space-y-1.5 w-full max-w-[680px]">
+      <div className="mt-4 space-y-1.5 w-full ">
         {/* Card 1 */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-xl border border-gray-light bg-white p-3 shadow-[0_2px_8px_rgba(15,41,64,0.03)]">
           <div className="min-w-0">
             <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
               DOWNLOAD CREDENTIALS
             </h3>
-            <p className="mt-0.5 text-xs leading-4 text-navy/60">
+            <p className="mt-0.5 text-xs  text-navy/60">
               You can always download these and save them in a safe place for later use.
             </p>
           </div>
@@ -129,7 +129,7 @@ export default function AgentSection() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
               DOWNLOAD YOUR AGENT
             </h3>
-            <p className="mt-0.5 text-xs leading-4 text-navy/60">
+            <p className="mt-0.5 text-xs text-navy/60">
               Download the agent that you will need to install and run in your infrastructure. This agent contains a ZIP folder containing a binary as well as the documentation to install/uninstall this agent.
             </p>
           </div>
@@ -149,7 +149,7 @@ export default function AgentSection() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
               DOWNLOAD LATER
             </h3>
-            <p className="mt-0.5 text-xs leading-4 text-navy/60">
+            <p className="mt-0.5 text-xs  text-navy/60">
               You do not need these downloads right now unless you want to start running tests right away. You can always download these later from your CyberCheck 24/7 Dashboard.
             </p>
           </div>

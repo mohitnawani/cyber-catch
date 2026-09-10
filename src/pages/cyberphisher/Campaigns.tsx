@@ -29,17 +29,10 @@ export default function Campaigns() {
   const [openMenu, setOpenMenu] = useState<number | null>(null);
 
   return (
-<<<<<<< HEAD
-    <section className=" pt-1">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <h2 className="text-[24px] font-bold tracking-[-0.03em] text-black">
-=======
-    <section className="w-full max-w-[920px] pt-1 overflow-x-hidden">
+<section className="w-full max-w-[920px] pt-1 overflow-x-hidden">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="min-w-0">
           <h2 className="text-lg sm:text-[20px] font-bold tracking-[-0.03em] text-black">
->>>>>>> 0fdcb40 (commited)
             Phishing Campaigns
           </h2>
           <p className="mt-1 text-xs leading-4 text-navy/75">

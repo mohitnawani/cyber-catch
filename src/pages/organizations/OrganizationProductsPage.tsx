@@ -26,6 +26,8 @@ export default function OrganizationProductsPage() {
   const [products, setProducts] = useState(initialProducts);
   // Tracks the product waiting for an activate/deactivate confirmation.
   const [pendingProduct, setPendingProduct] = useState<Product | null>(null);
+  // Tracks the visually selected card (Figma blue border).
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(2);
   // Controls which organization detail tab is visible.
   const [activeTab, setActiveTab] = useState<
     "general" | "products" | "members" | "subsidiaries"
@@ -165,31 +167,38 @@ export default function OrganizationProductsPage() {
         </div>
       )}
       {activeTab === "products" && (
-        <div className="mt-3 grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-3 grid gap-2.5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <article
               key={product.id}
-              className="rounded-lg bg-white p-3 shadow-[0_4px_14px_rgba(15,41,64,0.05)]"
+              onClick={() => setSelectedProductId(product.id)}
+              className={`flex min-h-[140px] cursor-pointer flex-col rounded-xl bg-white p-4 shadow-[0_4px_14px_rgba(15,41,64,0.05)] transition ${selectedProductId === product.id ? "ring-2 ring-brand" : "hover:ring-1 hover:ring-brand/40"}`}
             >
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-[10px] font-bold text-navy truncate">
                   {product.name}
                 </h2>
                 <span
-                  className={`shrink-0 rounded-full px-2.5 py-0.5 text-[9px] font-semibold ${product.active ? "bg-[#c5f8dd] text-[#12a35d]" : "bg-[#eff1ff] text-[#8586a3]"}`}
+                  className={`shrink-0 rounded-full px-3 py-1 text-[9px] font-semibold ${product.active ? "bg-[#c5f8dd] text-[#12a35d]" : "bg-[#eef0f6] text-[#8586a3]"}`}
                 >
                   {product.active ? "Active" : "Not Active"}
                 </span>
               </div>
-              <div className="mt-4 flex items-center justify-between text-[9px] text-navy/60">
-                <button className="text-brand">Configure</button>
+              <div className="mt-auto flex items-center justify-between pt-8 text-[10px] text-navy/60">
                 <button
-                  onClick={() => setPendingProduct(product)}
+                  className="flex items-center gap-1 text-navy/50 hover:text-brand"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <span className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-current text-[8px]">⊕</span>
+                  Configure
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setPendingProduct(product); }}
                   aria-label={`${product.active ? "Deactivate" : "Activate"} ${product.name}`}
-                  className={`relative h-5 w-9 rounded-full transition ${product.active ? "bg-brand" : "bg-[#b9bbd0]"}`}
+                  className={`relative h-6 w-11 shrink-0 rounded-full transition ${product.active ? "bg-brand" : "bg-[#b9bbd0]"}`}
                 >
                   <span
-                    className={`absolute top-1 h-3 w-3 rounded-full bg-white transition ${product.active ? "right-1" : "left-1"}`}
+                    className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-all ${product.active ? "right-1" : "left-1"}`}
                   />
                 </button>
               </div>

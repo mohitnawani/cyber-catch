@@ -53,9 +53,9 @@ export default function FrameworkSection() {
   }
 
   return (
-    <section className="w-full max-w-[760px] py-4 overflow-x-hidden">
+    <section className="w-full max-w-[760px] py-2 overflow-x-hidden">
       {/* Title */}
-      <h1 className="text-lg sm:text-xl font-bold tracking-tight text-navy">
+      <h1 className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-navy">
         Select a Security Framework
       </h1>
       <p className="mt-1 text-xs leading-4 text-black">
@@ -121,20 +121,10 @@ export default function FrameworkSection() {
             className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 rounded-xl border border-gray-light/80 bg-white px-3 py-2 shadow-[0_2px_8px_rgba(15,41,64,0.03)] transition hover:border-brand/40 hover:shadow-sm"
           >
             <div className="flex items-center gap-2 min-w-0">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#5E81F41A] text-brand">
-                <Globe size={14} strokeWidth={1.8} className="h-3.5 w-3.5 object-contain" />
-              </span>
               <span className="text-xs font-medium text-brand truncate">{item.domain}</span>
             </div>
             <div className="flex items-center gap-1.5 self-end sm:self-auto shrink-0">
-              <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-brand">
-                <ShieldCheck size={12} />
-                {item.testsCount} tests
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-600">
-                <CheckCircle2 size={12} />
-                Active
-              </span>
+
             </div>
           </div>
         ))}
@@ -220,21 +210,13 @@ export default function FrameworkSection() {
 
       {/* Action Buttons */}
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <Button
-          type="button"
-          onClick={() => navigate('/cyber-check/agent')}
-          className="w-[120px]"
-        >
-          Continue
-        </Button>
-        <Button
-          variant="ghost"
-          type="button"
-          onClick={() => navigate('/cyber-check/schedule')}
-          className="text-navy/60 hover:text-navy"
-        >
-          Back to Schedule
-        </Button>
+          <Button
+            type="button"
+            onClick={() => navigate('/cyber-check/framework')}
+            className="w-[180px] h-[40px]"
+          >
+            Continue
+          </Button>
       </div>
     </section>
   )
